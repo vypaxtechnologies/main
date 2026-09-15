@@ -53,14 +53,7 @@ export default function CareersSection() {
                   <Briefcase className="h-5 w-5 text-brand-blue dark:text-brand-cyan" />
                 </div>
                 <div>
-                  <div className="flex items-center gap-2">
-                    <h3 className="text-sm font-semibold text-navy-900 dark:text-white">{role.title}</h3>
-                    {role.isPlaceholder && (
-                      <span className="rounded-full border border-amber-300 bg-amber-50 px-2 py-0.5 text-xs text-amber-700 dark:border-amber-700 dark:bg-amber-950/30 dark:text-amber-400">
-                        Demo
-                      </span>
-                    )}
-                  </div>
+                  <h3 className="text-sm font-semibold text-navy-900 dark:text-white">{role.title}</h3>
                   <p className="mt-0.5 text-xs text-[var(--text-muted)]">{role.type} · {role.location}</p>
                 </div>
               </div>

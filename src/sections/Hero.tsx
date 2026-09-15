@@ -113,7 +113,7 @@ export default function Hero() {
                   <div className="grid grid-cols-2 gap-3">
                     <div className="rounded-xl bg-[var(--bg-subtle)] p-3">
                       <p className="text-xs text-[var(--text-muted)]">Projects</p>
-                      <p className="text-lg font-bold text-navy-900 dark:text-white">50+</p>
+                      <p className="text-lg font-bold text-navy-900 dark:text-white">20+</p>
                     </div>
                     <div className="rounded-xl bg-[var(--bg-subtle)] p-3">
                       <p className="text-xs text-[var(--text-muted)]">Clients</p>
