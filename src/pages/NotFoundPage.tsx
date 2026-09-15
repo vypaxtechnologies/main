@@ -1,0 +1,4 @@
+import { useSEO } from '@/hooks/useSEO';
+import { Link } from 'react-router-dom';
+import { ArrowLeft, Compass } from 'lucide-react';
+export default function NotFoundPage() { useSEO({ title: 'Page Not Found | Vypax Technologies' }); return <section className="flex min-h-[70vh] items-center justify-center px-5 py-24"><div className="text-center"><div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-gradient text-white shadow-glow"><Compass className="h-8 w-8" /></div><p className="eyebrow mt-6">404 · Beyond the map</p><h1 className="mt-3 max-w-xl text-4xl font-bold text-navy-900 dark:text-white sm:text-5xl">Looks like you've gone beyond the limit.</h1><p className="mx-auto mt-4 max-w-md text-[var(--text-muted)]">The page you're looking for doesn't exist.</p><Link to="/" className="btn-primary mt-8"><ArrowLeft className="h-4 w-4" /> Back to Home</Link></div></section>; }

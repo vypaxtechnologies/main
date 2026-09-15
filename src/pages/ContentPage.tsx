@@ -1,0 +1,4 @@
+import { useSEO } from '@/hooks/useSEO';
+import Breadcrumbs from '@/components/Breadcrumbs';
+import SectionHeading from '@/components/SectionHeading';
+export default function ContentPage({ title, eyebrow, description }: { title: string; eyebrow: string; description: string }) { useSEO({ title: `${title} | Vypax Technologies`, description }); return <section className="pt-32 pb-24 md:pt-40"><div className="container-x"><Breadcrumbs items={[{ label: 'Home', path: '/' }, { label: title }]} /><SectionHeading eyebrow={eyebrow} title={title} subtitle={description} center={false} /><div className="mt-12 max-w-3xl rounded-card border border-[var(--border)] bg-[var(--card)] p-8 text-sm leading-relaxed text-[var(--text-muted)] shadow-card"><p>This page is ready for the company's final content. Replace this placeholder with the approved policy or resource text before publishing.</p></div></div></section>; }
