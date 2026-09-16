@@ -1,15 +1,14 @@
 import { Link } from 'react-router-dom';
-import { Mail, MapPin, Phone, Linkedin, Instagram, Twitter, Facebook, Github, ArrowUpRight } from 'lucide-react';
+import { Mail, MapPin, Phone, Linkedin, Instagram, Twitter, Facebook, ArrowUpRight } from 'lucide-react';
 import Logo from './Logo';
 import { companyConfig } from '@/data/company';
 import { services } from '@/data/services';
 
 const socialIcons = {
+  x: Twitter,
   linkedin: Linkedin,
   instagram: Instagram,
-  twitter: Twitter,
   facebook: Facebook,
-  github: Github,
 };
 
 export default function Footer() {

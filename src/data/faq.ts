@@ -6,7 +6,7 @@ export interface FAQItem {
 export const generalFaqs: FAQItem[] = [
   {
     q: 'What services does Vypax Technologies provide?',
-    a: 'We provide website development, digital marketing, SEO, Google Business Profile optimization, HR & recruitment, and custom software solutions — all designed to help businesses grow through technology.',
+    a: 'We provide website development, digital marketing, SEO, Google Business Profile optimization, data analysis and data science, and custom software solutions — all designed to help businesses grow through technology.',
   },
   {
     q: 'How much does a website cost?',

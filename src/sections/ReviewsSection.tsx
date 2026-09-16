@@ -6,9 +6,9 @@ export default function ReviewsSection() {
     <section className="section-pad">
       <div className="container-x">
         <SectionHeading
-          eyebrow="Testimonials"
+          eyebrow="Client Reviews"
           title="What Our Clients Say"
-          subtitle="Feedback from businesses we've helped grow."
+          subtitle="Feedback from clients we've helped build better digital experiences."
         />
         <div className="mt-12">
           <ReviewSlider />

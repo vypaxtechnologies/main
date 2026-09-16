@@ -8,7 +8,7 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import { services } from '@/data/services';
 
 export default function ServicesPage() {
-  useSEO({ title: 'IT Services & Digital Solutions | Vypax Technologies', description: 'Web development, digital marketing, SEO, Google Business Profile optimization, HR & recruitment, and custom software solutions in Roorkee.' });
+  useSEO({ title: 'IT Services & Digital Solutions | Vypax Technologies', description: 'Web development, digital marketing, SEO, Google Business Profile optimization, data analysis and data science, and custom software solutions in Roorkee.' });
   return <>
     <section className="pt-32 pb-12 md:pt-40"><div className="container-x"><Breadcrumbs items={[{ label: 'Home', path: '/' }, { label: 'Services' }]} /><SectionHeading eyebrow="Capabilities" title="IT Services & Digital Solutions" subtitle="Technology and digital solutions designed around your business goals." center={false} /></div></section>
     <section className="section-pad bg-[var(--bg-subtle)]"><div className="container-x"><div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">{services.map((s, i) => <ServiceCard key={s.slug} service={s} index={i} />)}</div></div></section>

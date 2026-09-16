@@ -5,13 +5,10 @@ import { Menu, X, ArrowRight } from 'lucide-react';
 import Logo from './Logo';
 import ThemeToggle from './ThemeToggle';
 import { companyConfig } from '@/data/company';
-import { useScrollPosition } from '@/hooks/useScrollPosition';
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const scrolled = useScrollPosition(20);
   const location = useLocation();
-  const isHome = location.pathname === '/';
 
   useEffect(() => {
     setMobileOpen(false);
@@ -24,11 +21,7 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled || !isHome
-          ? 'border-b border-[var(--border)] bg-[var(--bg)]/80 backdrop-blur-lg'
-          : 'border-b border-transparent bg-transparent'
-      }`}
+      className="fixed inset-x-3 top-3 z-50 rounded-2xl border border-white/40 bg-white/65 shadow-lg shadow-navy-900/5 backdrop-blur-xl transition-all duration-300 dark:border-white/10 dark:bg-navy-950/65 dark:shadow-black/20 sm:inset-x-5 md:top-4"
     >
       <nav className="container-x flex h-16 items-center justify-between md:h-20">
         <Logo />

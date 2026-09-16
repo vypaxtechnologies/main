@@ -11,7 +11,7 @@ export default function WhyVypax() {
         <SectionHeading
           eyebrow="Why Choose Us"
           title="Why Vypax Technologies?"
-          subtitle="Technology. Strategy. Growth. — that's our approach to every project."
+          subtitle="Practical technology and measurable growth for every project."
         />
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {whyVypax.map((item, i) => {

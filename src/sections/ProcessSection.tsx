@@ -8,7 +8,7 @@ export default function ProcessSection() {
         <SectionHeading
           eyebrow="Our Process"
           title="How We Work"
-          subtitle="A proven five-step process that takes you from idea to growth."
+          subtitle="A clear five-step process with practical deliverables at every stage."
         />
         <ProcessTimeline />
       </div>

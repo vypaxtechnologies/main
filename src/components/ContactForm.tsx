@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Send, CheckCircle2, AlertCircle } from 'lucide-react';
 import { serviceDropdown } from '@/data/services';
+import { companyConfig } from '@/data/company';
 
 interface FormData {
   name: string;
@@ -41,8 +42,18 @@ export default function ContactForm() {
     if (!validate()) return;
     setStatus('idle');
     try {
-      // Frontend abstraction — connect to backend/email provider here
-      await new Promise((r) => setTimeout(r, 800));
+      const payload = new FormData();
+      Object.entries(data).forEach(([key, value]) => payload.append(key, value));
+      payload.append('_subject', `New contact form message from ${data.name}`);
+      payload.append('_captcha', 'false');
+      payload.append('_template', 'table');
+
+      const response = await fetch(`https://formsubmit.co/ajax/${companyConfig.email}`, {
+        method: 'POST',
+        body: payload,
+      });
+      if (!response.ok) throw new Error('Contact form submission failed');
+
       setStatus('success');
       setData({ name: '', email: '', phone: '', company: '', service: '', message: '' });
     } catch {

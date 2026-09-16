@@ -4,9 +4,6 @@ import HomePage from '@/pages/HomePage';
 import AboutPage from '@/pages/AboutPage';
 import ServicesPage from '@/pages/ServicesPage';
 import ServiceDetailPage from '@/pages/ServiceDetailPage';
-import PortfolioPage from '@/pages/PortfolioPage';
-import TeamPage from '@/pages/TeamPage';
-import ReviewsPage from '@/pages/ReviewsPage';
 import CareersPage from '@/pages/CareersPage';
 import ContactPage from '@/pages/ContactPage';
 import ContentPage from '@/pages/ContentPage';
@@ -21,9 +18,6 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/services/:slug" element={<ServiceDetailPage />} />
-          <Route path="/portfolio" element={<PortfolioPage />} />
-          <Route path="/team" element={<TeamPage />} />
-          <Route path="/reviews" element={<ReviewsPage />} />
           <Route path="/careers" element={<CareersPage />} />
           <Route path="/blog" element={<ContentPage title="Blog / Resources" eyebrow="Resources" description="Insights and practical ideas for building better digital experiences and stronger businesses." />} />
           <Route path="/contact" element={<ContactPage />} />

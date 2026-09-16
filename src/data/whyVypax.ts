@@ -48,11 +48,11 @@ export const whyVypax: WhyItem[] = [
 ];
 
 export const processSteps = [
-  { num: '01', title: 'Discover', description: 'We listen to your goals, challenges, and vision to understand what success looks like.', icon: 'search' },
-  { num: '02', title: 'Plan', description: 'We create a clear strategy, timeline, and scope aligned with your business objectives.', icon: 'clipboard' },
-  { num: '03', title: 'Build', description: 'Our team designs and develops your solution with regular check-ins and feedback loops.', icon: 'hammer' },
-  { num: '04', title: 'Launch', description: 'We test, refine, and deploy — ensuring everything works flawlessly before going live.', icon: 'rocket' },
-  { num: '05', title: 'Grow', description: 'Post-launch we monitor, optimize, and iterate to drive continued growth.', icon: 'trending-up' },
+  { num: '01', title: 'Discover', description: 'Requirements, business goals, audience and technical assessment.', icon: 'search' },
+  { num: '02', title: 'Strategy', description: 'Scope, architecture, timeline and success metrics.', icon: 'clipboard' },
+  { num: '03', title: 'Build', description: 'UI/UX, development, integrations and testing.', icon: 'hammer' },
+  { num: '04', title: 'Launch', description: 'Deployment, QA, analytics and handover.', icon: 'rocket' },
+  { num: '05', title: 'Optimize', description: 'Maintenance, SEO, performance and continuous improvement.', icon: 'trending-up' },
 ];
 
 export const aboutValues = [

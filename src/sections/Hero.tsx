@@ -106,7 +106,7 @@ export default function Hero() {
                   <div className="flex items-center justify-between rounded-xl bg-[var(--bg-subtle)] p-3">
                     <div>
                       <p className="text-xs text-[var(--text-muted)]">Business Growth</p>
-                      <p className="text-lg font-bold text-navy-900 dark:text-white">+247%</p>
+                      <p className="text-lg font-bold text-navy-900 dark:text-white">2X</p>
                     </div>
                     <BarChart3 className="h-8 w-8 text-brand-blue dark:text-brand-cyan" />
                   </div>

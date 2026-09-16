@@ -32,13 +32,13 @@ function getBotResponse(input: string): string {
   if (q.includes('location') || q.includes('where'))
     return `We're based in ${companyConfig.location}, and we work with clients across India and remotely.`;
   if (q.includes('process') || q.includes('how do you work'))
-    return 'Our process follows five steps: Discover, Plan, Build, Launch, and Grow. We start with a free consultation to understand your needs.';
+    return 'Our process covers discovery, strategy, building, launch, and optimization, including requirements, architecture, development, QA, analytics, SEO, and continuous improvement.';
   if (q.includes('support') || q.includes('maintenance'))
     return 'Yes, we provide ongoing maintenance and support plans for security updates, content changes, performance monitoring, and feature enhancements.';
   if (q.includes('team') || q.includes('talk'))
     return `You can reach our team at ${companyConfig.email}. We'd be happy to schedule a free consultation.`;
-  if (q.includes('hr') || q.includes('recruit') || q.includes('hiring'))
-    return 'We offer HR & recruitment services including candidate sourcing, screening, interview coordination, and onboarding support.';
+  if (q.includes('data') || q.includes('analytics') || q.includes('sales'))
+    return 'Our data analysis and data science services help identify business problems, understand customer and sales patterns, and recommend practical ways to improve growth and revenue.';
   return 'I can help with information about our services, process, pricing, and contact details. What would you like to know?';
 }
 

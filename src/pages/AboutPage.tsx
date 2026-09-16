@@ -8,7 +8,7 @@ import { aboutValues } from '@/data/whyVypax';
 import { companyConfig } from '@/data/company';
 
 export default function AboutPage() {
-  useSEO({ title: 'About Vypax Technologies | Technology, Strategy & Growth', description: 'Vypax Technologies is an IT services and digital growth company in Roorkee, Uttarakhand. Technology. Strategy. Growth.' });
+  useSEO({ title: 'About Vypax Technologies', description: 'Vypax Technologies is a technology and digital growth company helping businesses build better digital products, improve their online presence, and create scalable technology systems.' });
   return (
     <>
       <section className="pt-32 pb-12 md:pt-40">
@@ -16,10 +16,16 @@ export default function AboutPage() {
           <Breadcrumbs items={[{ label: 'Home', path: '/' }, { label: 'About' }]} />
           <SectionHeading
             eyebrow="About Us"
-            title="About Vypax Technologies"
-            subtitle="Technology. Strategy. Growth. — your trusted partner for digital transformation."
+            title="Who We Are"
+            subtitle="Vypax Technologies is a technology and digital growth company helping businesses build better digital products, improve their online presence, and create scalable technology systems."
             center={false}
           />
+          <div className="mt-6 max-w-3xl border-l-2 border-brand-blue pl-4 dark:border-brand-cyan">
+            <h2 className="text-lg font-semibold text-navy-900 dark:text-white">What We Believe</h2>
+            <p className="mt-2 text-base leading-relaxed text-[var(--text-muted)]">
+              Technology should solve a business problem, not simply exist for the sake of technology.
+            </p>
+          </div>
         </div>
       </section>
 

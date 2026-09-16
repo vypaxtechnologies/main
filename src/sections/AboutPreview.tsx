@@ -12,10 +12,17 @@ export default function AboutPreview() {
           <div>
             <SectionHeading
               eyebrow="About Us"
-              title="Technology. Strategy. Growth."
-              subtitle="Vypax Technologies is an IT services and digital growth company based in Roorkee, Uttarakhand. We help businesses leverage technology to solve real problems and achieve sustainable growth."
+              title="Who We Are"
+              subtitle="Vypax Technologies is a technology and digital growth company helping businesses build better digital products, improve their online presence, and create scalable technology systems."
               center={false}
             />
+
+            <div className="mt-6 border-l-2 border-brand-blue pl-4 dark:border-brand-cyan">
+              <h3 className="text-sm font-semibold text-navy-900 dark:text-white">What We Believe</h3>
+              <p className="mt-1 text-sm leading-relaxed text-[var(--text-muted)]">
+                Technology should solve a business problem, not simply exist for the sake of technology.
+              </p>
+            </div>
 
             <div className="mt-8 space-y-5">
               <div className="flex gap-4">
