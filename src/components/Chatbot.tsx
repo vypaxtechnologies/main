@@ -12,6 +12,9 @@ const quickActions = [
   'Website Development',
   'Digital Marketing',
   'SEO',
+  'Custom Software',
+  'Solutions',
+  'Our Process',
   'Get a Quote',
   'Talk to Our Team',
 ];
@@ -19,27 +22,43 @@ const quickActions = [
 // Local mock response engine — designed to be replaced by an LLM API
 function getBotResponse(input: string): string {
   const q = input.toLowerCase();
-  if (q.includes('price') || q.includes('cost') || q.includes('quote') || q.includes('how much'))
-    return 'Pricing depends on your project requirements. I\'d recommend requesting a free consultation so our team can provide a tailored quote. You can use the contact form or start a WhatsApp conversation.';
+  if (q.includes('hello') || q.includes('hi') || q.includes('hey') || q.includes('नमस्ते') || q.includes('नमस्कार'))
+    return 'Hello! I can help you explore Vypax services, timelines, training and development, solutions, or the next step for your project.';
+  if (q.includes('training') || q.includes('learning') || q.includes('course') || q.includes('development program'))
+    return 'Our Training & Development programs focus on practical technology foundations, digital skills, career readiness, mentorship, and guided project learning.';
   if (q.includes('website') || q.includes('web'))
-    return `We build fast, modern, scalable websites using technologies like React, Next.js, and Tailwind CSS. We can help with everything from a simple business site to a full e-commerce platform. Would you like to request a consultation?`;
-  if (q.includes('marketing'))
-    return 'Our digital marketing services include social media campaigns, Google Ads, content marketing, and lead generation — all data-driven and focused on measurable growth.';
-  if (q.includes('seo'))
-    return 'We provide technical SEO audits, on-page optimization, keyword research, local SEO, and Google Business Profile optimization to improve your search visibility and organic traffic.';
+    return 'We build fast, responsive websites and web experiences with React, Node.js, Tailwind CSS, and SEO-ready foundations. We can support business websites, landing pages, portals, and e-commerce journeys.';
+  if (q.includes('software') || q.includes('application') || q.includes('app') || q.includes('custom'))
+    return 'Our custom software work includes dashboards, internal tools, workflow automation, API integrations, and web applications designed around your actual operations.';
+  if (q.includes('marketing') || q.includes('social media') || q.includes('ads'))
+    return 'Our digital marketing support covers campaign planning, content direction, paid acquisition, lead generation, analytics, and reporting focused on clear business goals.';
+  if (q.includes('seo') || q.includes('search') || q.includes('ranking') || q.includes('google business') || q.includes('local'))
+    return 'We work on technical SEO, content and on-page improvements, local search, Google Business Profile optimization, and measurement through search analytics.';
+  if (q.includes('solution') || q.includes('industry') || q.includes('startup') || q.includes('healthcare') || q.includes('real estate'))
+    return 'Our solutions are adapted for startups, healthcare, professional services, education, real estate, B2B, and SaaS teams. Visit the Solutions page or tell us about your business context.';
+  if (q.includes('technology') || q.includes('tech stack') || q.includes('stack') || q.includes('react') || q.includes('node'))
+    return 'We choose technology around the problem: React and TypeScript for interfaces, Node.js for APIs, MongoDB or other suitable databases, Tailwind CSS for UI, and analytics for learning.';
+  if (q.includes('timeline') || q.includes('duration') || q.includes('how long'))
+    return 'A focused business website often takes a few weeks, while custom software and growth engagements vary with discovery, integrations, and review cycles. We confirm a timeline after understanding the scope.';
+  if (q.includes('project') || q.includes('portfolio') || q.includes('work'))
+    return 'You can explore the Projects page for the kinds of digital systems and experiences we are prepared to build. For a relevant recommendation, share your goals with the team.';
+  if (q.includes('career') || q.includes('job') || q.includes('hiring') || q.includes('join'))
+    return 'Open roles and application details are available on the Careers page. You can also contact the team with your background and the kind of work you want to contribute to.';
   if (q.includes('contact') || q.includes('email') || q.includes('reach'))
     return `You can reach us at ${companyConfig.email} or visit our contact page. We're based in ${companyConfig.location}.`;
   if (q.includes('location') || q.includes('where'))
     return `We're based in ${companyConfig.location}, and we work with clients across India and remotely.`;
-  if (q.includes('process') || q.includes('how do you work'))
-    return 'Our process covers discovery, strategy, building, launch, and optimization, including requirements, architecture, development, QA, analytics, SEO, and continuous improvement.';
+  if (q.includes('process') || q.includes('how do you work') || q.includes('start'))
+    return 'We usually begin with discovery, clarify the goal, shape the strategy, design the experience, build and test carefully, then support improvement after launch.';
   if (q.includes('support') || q.includes('maintenance'))
     return 'Yes, we provide ongoing maintenance and support plans for security updates, content changes, performance monitoring, and feature enhancements.';
   if (q.includes('team') || q.includes('talk'))
     return `You can reach our team at ${companyConfig.email}. We'd be happy to schedule a free consultation.`;
-  if (q.includes('data') || q.includes('analytics') || q.includes('sales'))
-    return 'Our data analysis and data science services help identify business problems, understand customer and sales patterns, and recommend practical ways to improve growth and revenue.';
-  return 'I can help with information about our services, process, pricing, and contact details. What would you like to know?';
+  if (q.includes('data') || q.includes('analytics') || q.includes('sales') || q.includes('dashboard'))
+    return 'Our data and analytics work helps teams understand performance, customer behavior, sales patterns, and operational bottlenecks through dashboards and practical recommendations.';
+  if (q.includes('thank') || q.includes('thanks'))
+    return 'You are welcome. I am here whenever you need help choosing a service or preparing your project brief.';
+  return 'I can help with services, custom software, solutions, SEO, training and development, timelines, process, careers, projects, and contact details. What would you like to explore?';
 }
 
 export default function Chatbot() {
@@ -90,7 +109,7 @@ export default function Chatbot() {
               </button>
             </div>
 
-            <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto p-4">
+            <div ref={scrollRef} className="chat-scroll flex-1 space-y-3 overflow-y-auto p-4">
               {messages.map((msg, i) => (
                 <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                   <div
@@ -129,7 +148,7 @@ export default function Chatbot() {
                   placeholder="Type your message..."
                   className="flex-1 rounded-full border border-[var(--border)] bg-[var(--bg)] px-4 py-2 text-sm text-[var(--text)] outline-none focus:border-brand-blue"
                 />
-                <button type="submit" aria-label="Send message" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-gradient text-white">
+                <button type="submit" aria-label="Send message" className="icon-tile h-9 w-9 shrink-0 rounded-full">
                   <Send className="h-4 w-4" />
                 </button>
               </form>
@@ -138,13 +157,18 @@ export default function Chatbot() {
         )}
       </AnimatePresence>
 
-      <button
-        onClick={() => setOpen((v) => !v)}
-        aria-label={open ? 'Close chat' : 'Open Vypax Assistant chat'}
-        className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-gradient text-white shadow-glow transition-transform hover:scale-110"
-      >
-        {open ? <X className="h-6 w-6" /> : <Sparkles className="h-6 w-6" />}
-      </button>
+      <div className="group relative">
+        <button
+          onClick={() => setOpen((v) => !v)}
+          aria-label={open ? 'Close chat' : 'Open Vypax Assistant chat'}
+          className="icon-tile h-14 w-14 rounded-full shadow-soft transition-transform hover:scale-110"
+        >
+          {open ? <X className="h-6 w-6" /> : <Sparkles className="h-6 w-6" />}
+        </button>
+        <span className="pointer-events-none absolute bottom-full right-0 mb-3 whitespace-nowrap rounded-lg border border-[var(--border)] bg-[var(--card)] px-3 py-2 text-xs font-medium text-navy-900 opacity-0 shadow-card transition-all duration-200 group-hover:-translate-y-1 group-hover:opacity-100 dark:text-white">
+          Vypax Assistant
+        </span>
+      </div>
     </div>
   );
 }

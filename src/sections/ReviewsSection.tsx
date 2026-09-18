@@ -8,9 +8,9 @@ export default function ReviewsSection() {
         <SectionHeading
           eyebrow="Client Reviews"
           title="What Our Clients Say"
-          subtitle="Feedback from clients we've helped build better digital experiences."
+          subtitle="Anonymized project stories for now. Named testimonials will be added with client approval."
         />
-        <div className="mt-12">
+        <div className="mt-10">
           <ReviewSlider />
         </div>
       </div>

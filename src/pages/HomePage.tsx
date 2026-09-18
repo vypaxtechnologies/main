@@ -4,6 +4,7 @@ import ServiceStrip from '@/sections/ServiceStrip';
 import AboutPreview from '@/sections/AboutPreview';
 import ServicesSection from '@/sections/ServicesSection';
 import WhyVypax from '@/sections/WhyVypax';
+import ExploreSection from '@/sections/ExploreSection';
 import ProcessSection from '@/sections/ProcessSection';
 import ReviewsSection from '@/sections/ReviewsSection';
 import CareersSection from '@/sections/CareersSection';
@@ -20,6 +21,7 @@ export default function HomePage() {
       <AboutPreview />
       <ServicesSection />
       <WhyVypax />
+      <ExploreSection />
       <ProcessSection />
       <ReviewsSection />
       <CareersSection />

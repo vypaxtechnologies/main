@@ -8,14 +8,14 @@ export default function FloatingContactButton() {
   const waLink = `https://wa.me/${companyConfig.whatsappNumber}`;
 
   return (
-    <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3 pointer-events-none">
-      <div className="relative pointer-events-auto" style={{ marginBottom: '4.5rem' }}>
+    <div className="pointer-events-none fixed bottom-6 right-[5.5rem] z-40 flex items-end">
+      <div className="pointer-events-auto relative">
         <button
           onClick={() => window.open(waLink, '_blank', 'noopener,noreferrer')}
           onMouseEnter={() => setShowTooltip(true)}
           onMouseLeave={() => setShowTooltip(false)}
           aria-label="Chat with us on WhatsApp"
-          className="flex h-12 w-12 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-transform hover:scale-110 animate-pulse-soft"
+          className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-blue text-white shadow-lg transition-transform hover:scale-110 animate-pulse-soft"
         >
           <MessageCircle className="h-6 w-6" />
         </button>

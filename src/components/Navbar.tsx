@@ -26,7 +26,7 @@ export default function Navbar() {
       <nav className="container-x flex h-16 items-center justify-between md:h-20">
         <Logo />
 
-        <div className="hidden items-center gap-8 lg:flex">
+        <div className="hidden items-center gap-6 xl:flex 2xl:gap-8">
           {companyConfig.nav.map((item) => (
             <Link
               key={item.path}
@@ -53,7 +53,7 @@ export default function Navbar() {
             onClick={() => setMobileOpen((v) => !v)}
             aria-label="Toggle menu"
             aria-expanded={mobileOpen}
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-[var(--border)] text-navy-700 dark:text-slate-300 lg:hidden"
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-[var(--border)] text-navy-700 dark:text-slate-300 xl:hidden"
           >
             {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -67,7 +67,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25 }}
-            className="overflow-hidden border-t border-[var(--border)] bg-[var(--bg)] lg:hidden"
+            className="overflow-hidden border-t border-[var(--border)] bg-[var(--bg)] xl:hidden"
           >
             <div className="container-x flex flex-col gap-1 py-4">
               {companyConfig.nav.map((item) => (

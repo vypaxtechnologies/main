@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, type FormEvent } from 'react';
 import { motion } from 'framer-motion';
-import { Send, CheckCircle2, AlertCircle } from 'lucide-react';
+import { ArrowUpRight, CheckCircle2, LoaderCircle, Send, Sparkles, AlertCircle } from 'lucide-react';
 import { serviceDropdown } from '@/data/services';
 import { companyConfig } from '@/data/company';
 
@@ -21,6 +21,7 @@ export default function ContactForm() {
   });
   const [errors, setErrors] = useState<Partial<FormData>>({});
   const [status, setStatus] = useState<Status>('idle');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validate = (): boolean => {
     const e: Partial<FormData> = {};
@@ -37,36 +38,64 @@ export default function ContactForm() {
     if (errors[field]) setErrors((e) => ({ ...e, [field]: undefined }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
     setStatus('idle');
+    setIsSubmitting(true);
     try {
-      const payload = new FormData();
-      Object.entries(data).forEach(([key, value]) => payload.append(key, value));
-      payload.append('_subject', `New contact form message from ${data.name}`);
-      payload.append('_captcha', 'false');
-      payload.append('_template', 'table');
+      const emailPayload = new FormData();
+      Object.entries(data).forEach(([key, value]) => emailPayload.append(key, value));
+      emailPayload.append('_subject', `New contact form message from ${data.name}`);
+      emailPayload.append('_captcha', 'false');
+      emailPayload.append('_template', 'table');
 
-      const response = await fetch(`https://formsubmit.co/ajax/${companyConfig.email}`, {
-        method: 'POST',
-        body: payload,
-      });
-      if (!response.ok) throw new Error('Contact form submission failed');
+      const [emailResponse, databaseResponse] = await Promise.all([
+        fetch(`https://formsubmit.co/ajax/${companyConfig.email}`, {
+          method: 'POST',
+          body: emailPayload,
+        }),
+        fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        }),
+      ]);
+
+      if (!emailResponse.ok || !databaseResponse.ok) {
+        const result = await databaseResponse.json().catch(() => null);
+        throw new Error(result?.message || 'Contact form submission failed');
+      }
 
       setStatus('success');
       setData({ name: '', email: '', phone: '', company: '', service: '', message: '' });
     } catch {
       setStatus('error');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5" noValidate>
-      <div className="grid gap-5 sm:grid-cols-2">
+    <form onSubmit={handleSubmit} className="space-y-7" noValidate>
+      <div className="flex flex-col gap-3 border-b border-[var(--border)] pb-6 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-navy-900 dark:text-white">
-            Name *
+          <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-brand-blue dark:text-brand-cyan">
+            <Sparkles className="h-3.5 w-3.5" />
+            Project brief
+          </p>
+          <h3 className="mt-2 text-2xl font-bold text-navy-900 dark:text-white">What are we building?</h3>
+          <p className="mt-2 max-w-lg text-sm leading-relaxed text-[var(--text-muted)]">Share a little context and we&apos;ll come back with thoughtful next steps.</p>
+        </div>
+        <span className="text-xs text-[var(--text-muted)]">Takes 2 minutes</span>
+      </div>
+
+      <div>
+        <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--text-muted)]">Your details</p>
+        <div className="grid gap-5 sm:grid-cols-2">
+        <div>
+          <label htmlFor="name" className="mb-2 block text-sm font-semibold text-navy-900 dark:text-white">
+            Your name <span className="text-brand-blue">*</span>
           </label>
           <input
             id="name"
@@ -74,13 +103,14 @@ export default function ContactForm() {
             value={data.name}
             onChange={(e) => handleChange('name', e.target.value)}
             className="input-field"
+            placeholder="e.g. Ankit Sharma"
             aria-invalid={!!errors.name}
           />
-          {errors.name && <p className="mt-1 text-xs text-red-500">{errors.name}</p>}
+          {errors.name && <p className="mt-1 text-xs text-brand-blue">{errors.name}</p>}
         </div>
         <div>
-          <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-navy-900 dark:text-white">
-            Email *
+          <label htmlFor="email" className="mb-2 block text-sm font-semibold text-navy-900 dark:text-white">
+            Work email <span className="text-brand-blue">*</span>
           </label>
           <input
             id="email"
@@ -88,13 +118,14 @@ export default function ContactForm() {
             value={data.email}
             onChange={(e) => handleChange('email', e.target.value)}
             className="input-field"
+            placeholder="you@company.com"
             aria-invalid={!!errors.email}
           />
-          {errors.email && <p className="mt-1 text-xs text-red-500">{errors.email}</p>}
+          {errors.email && <p className="mt-1 text-xs text-brand-blue">{errors.email}</p>}
         </div>
         <div>
-          <label htmlFor="phone" className="mb-1.5 block text-sm font-medium text-navy-900 dark:text-white">
-            Phone
+          <label htmlFor="phone" className="mb-2 block text-sm font-semibold text-navy-900 dark:text-white">
+            Phone number <span className="font-normal text-[var(--text-muted)]">(optional)</span>
           </label>
           <input
             id="phone"
@@ -102,11 +133,12 @@ export default function ContactForm() {
             value={data.phone}
             onChange={(e) => handleChange('phone', e.target.value)}
             className="input-field"
+            placeholder="+91 00000 00000"
           />
         </div>
         <div>
-          <label htmlFor="company" className="mb-1.5 block text-sm font-medium text-navy-900 dark:text-white">
-            Company
+          <label htmlFor="company" className="mb-2 block text-sm font-semibold text-navy-900 dark:text-white">
+            Company <span className="font-normal text-[var(--text-muted)]">(optional)</span>
           </label>
           <input
             id="company"
@@ -114,18 +146,21 @@ export default function ContactForm() {
             value={data.company}
             onChange={(e) => handleChange('company', e.target.value)}
             className="input-field"
+            placeholder="Your company name"
           />
         </div>
+        </div>
       </div>
+
       <div>
-        <label htmlFor="service" className="mb-1.5 block text-sm font-medium text-navy-900 dark:text-white">
-          Service
+        <label htmlFor="service" className="mb-2 block text-sm font-semibold text-navy-900 dark:text-white">
+          What can we help with?
         </label>
         <select
           id="service"
           value={data.service}
           onChange={(e) => handleChange('service', e.target.value)}
-          className="input-field"
+          className="input-field cursor-pointer"
         >
           <option value="">Select a service</option>
           {serviceDropdown.map((s) => (
@@ -134,45 +169,54 @@ export default function ContactForm() {
         </select>
       </div>
       <div>
-        <label htmlFor="message" className="mb-1.5 block text-sm font-medium text-navy-900 dark:text-white">
-          Message *
-        </label>
+        <div className="mb-2 flex items-baseline justify-between gap-3">
+          <label htmlFor="message" className="block text-sm font-semibold text-navy-900 dark:text-white">
+            Tell us about the project <span className="text-brand-blue">*</span>
+          </label>
+          <span className="text-xs text-[var(--text-muted)]">{data.message.length}/1000</span>
+        </div>
         <textarea
           id="message"
-          rows={5}
+          rows={6}
+          maxLength={1000}
           value={data.message}
           onChange={(e) => handleChange('message', e.target.value)}
+          placeholder="What are you trying to achieve, and where are you currently stuck?"
           className="input-field resize-none"
           aria-invalid={!!errors.message}
         />
-        {errors.message && <p className="mt-1 text-xs text-red-500">{errors.message}</p>}
+        {errors.message && <p className="mt-1 text-xs text-brand-blue">{errors.message}</p>}
       </div>
 
       {status === 'success' && (
         <motion.div
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
-          className="flex items-center gap-2 rounded-xl border border-green-200 bg-green-50 p-4 text-sm text-green-700 dark:border-green-800 dark:bg-green-950/30 dark:text-green-400"
+          className="flex items-start gap-3 rounded-2xl border border-brand-blue bg-brand-blue/10 p-4 text-sm text-brand-blue dark:border-brand-cyan dark:bg-brand-cyan/10 dark:text-brand-cyan"
         >
-          <CheckCircle2 className="h-5 w-5 shrink-0" />
-          Thank you! Your message has been sent. We'll get back to you soon.
+          <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0" />
+          <span><strong className="font-semibold">Message received.</strong> We&apos;ll get back to you soon.</span>
         </motion.div>
       )}
       {status === 'error' && (
         <motion.div
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
-          className="flex items-center gap-2 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700 dark:border-red-800 dark:bg-red-950/30 dark:text-red-400"
+          className="flex items-start gap-3 rounded-2xl border border-brand-blue bg-brand-blue/10 p-4 text-sm text-brand-blue dark:border-brand-cyan dark:bg-brand-cyan/10 dark:text-brand-cyan"
         >
-          <AlertCircle className="h-5 w-5 shrink-0" />
-          Something went wrong. Please try again or email us directly.
+          <AlertCircle className="mt-0.5 h-5 w-5 shrink-0" />
+          <span>Something went wrong. Please try again or email us directly.</span>
         </motion.div>
       )}
 
-      <button type="submit" className="btn-primary w-full sm:w-auto">
-        <Send className="h-4 w-4" />
-        Send Message
-      </button>
+      <div className="flex flex-col gap-4 border-t border-[var(--border)] pt-6 sm:flex-row sm:items-center sm:justify-between">
+        <p className="max-w-xs text-xs leading-relaxed text-[var(--text-muted)]">By sending this form, you agree to be contacted about your enquiry.</p>
+        <button type="submit" disabled={isSubmitting} className="btn-primary w-full shrink-0 disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto">
+          {isSubmitting ? <LoaderCircle className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
+          {isSubmitting ? 'Sending...' : 'Send project brief'}
+          {!isSubmitting && <ArrowUpRight className="h-4 w-4" />}
+        </button>
+      </div>
     </form>
   );
 }

@@ -47,7 +47,7 @@ export default function AboutPage() {
                   transition={{ delay: i * 0.1 }}
                   className="rounded-card border border-[var(--border)] bg-[var(--card)] p-6 shadow-card"
                 >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-gradient text-white">
+                  <div className="icon-tile h-12 w-12">
                     <Icon className="h-6 w-6" />
                   </div>
                   <h3 className="mt-4 text-lg font-semibold text-navy-900 dark:text-white">{item.title}</h3>

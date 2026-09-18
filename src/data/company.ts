@@ -12,14 +12,22 @@ export const companyConfig = {
     x: 'https://x.com/Vypaxtechnology',
     linkedin: 'https://www.linkedin.com/company/vypax-technologies/',
     instagram: 'https://www.instagram.com/vypaxtechnologies',
-    facebook: 'https://www.facebook.com/people/Vypax-Technologies/61594633851495/',
+    facebook: 'https://www.facebook.com/vypaxtechnologies/',
   },
   nav: [
     { label: 'Home', path: '/' },
-    { label: 'About', path: '/about' },
     { label: 'Services', path: '/services' },
-    { label: 'Careers', path: '/careers' },
+    { label: 'Solutions', path: '/solutions' },
+    { label: 'Projects', path: '/projects' },
+    { label: 'About', path: '/about' },
     { label: 'Contact', path: '/contact' },
+  ],
+  exploreNav: [
+    { label: 'Solutions', path: '/solutions', description: 'Solutions shaped around your market.' },
+    { label: 'Projects', path: '/projects', description: 'See the kind of work we can build.' },
+    { label: 'Training & Development', path: '/training-development', description: 'Build practical technology and digital skills.' },
+    { label: 'Blog', path: '/blog', description: 'Practical ideas for digital growth.' },
+    { label: 'Careers', path: '/careers', description: 'Join a thoughtful, growing team.' },
   ],
 };
 

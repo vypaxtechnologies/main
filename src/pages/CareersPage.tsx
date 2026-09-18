@@ -28,18 +28,28 @@ export default function CareersPage() {
 		event.preventDefault();
 		setSubmitStatus('idle');
 		const form = event.currentTarget;
-		const payload = new FormData(form);
-		payload.append('_subject', `New job application for ${selectedRole}`);
-		payload.append('_role', selectedRole ?? 'General application');
-		payload.append('_captcha', 'false');
-		payload.append('_template', 'table');
+		const emailPayload = new FormData(form);
+		const databasePayload = new FormData(form);
+		const resume = databasePayload.get('_attachment');
+		databasePayload.append('role', selectedRole ?? 'General application');
+		databasePayload.append('resumeName', resume instanceof File ? resume.name : '');
+		emailPayload.append('_subject', `New job application for ${selectedRole}`);
+		emailPayload.append('_role', selectedRole ?? 'General application');
+		emailPayload.append('_captcha', 'false');
+		emailPayload.append('_template', 'table');
 
 		try {
-			const response = await fetch(`https://formsubmit.co/ajax/${companyConfig.email}`, {
-				method: 'POST',
-				body: payload,
-			});
-			if (!response.ok) throw new Error('Application submission failed');
+			const [emailResponse, databaseResponse] = await Promise.all([
+				fetch(`https://formsubmit.co/ajax/${companyConfig.email}`, {
+					method: 'POST',
+					body: emailPayload,
+				}),
+				fetch('/api/careers', {
+					method: 'POST',
+					body: databasePayload,
+				}),
+			]);
+			if (!emailResponse.ok || !databaseResponse.ok) throw new Error('Application submission failed');
 			setSubmitStatus('success');
 			form.reset();
 			setHasExperience('');
@@ -62,7 +72,7 @@ export default function CareersPage() {
 					{careers.map((role) => (
 						<div key={role.id} className="flex flex-col justify-between gap-4 rounded-card border border-[var(--border)] bg-[var(--card)] p-6 shadow-card sm:flex-row sm:items-center">
 							<div className="flex items-start gap-4">
-								<div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-gradient text-white">
+								<div className="icon-tile h-11 w-11 shrink-0">
 									<Briefcase className="h-5 w-5" />
 								</div>
 								<div>
@@ -121,7 +131,7 @@ export default function CareersPage() {
 
 								<div>
 									<label htmlFor="resume" className="mb-1.5 block text-sm font-medium text-navy-900 dark:text-white">Resume / CV Upload *</label>
-									<input id="resume" name="resume" type="file" accept=".pdf,.doc,.docx" className="input-field file:mr-4 file:rounded-full file:border-0 file:bg-brand-blue/10 file:px-4 file:py-2 file:text-sm file:font-medium file:text-brand-blue" required />
+									<input id="resume" name="_attachment" type="file" accept=".pdf,.doc,.docx" className="input-field file:mr-4 file:rounded-full file:border-0 file:bg-brand-blue/10 file:px-4 file:py-2 file:text-sm file:font-medium file:text-brand-blue" required />
 									<p className="mt-1 text-xs text-[var(--text-muted)]">PDF, DOC, or DOCX files only.</p>
 								</div>
 
@@ -135,13 +145,13 @@ export default function CareersPage() {
 								</label>
 
 								{submitStatus === 'success' && (
-									<div className="flex items-center gap-2 rounded-xl border border-green-200 bg-green-50 p-4 text-sm text-green-700 dark:border-green-800 dark:bg-green-950/30 dark:text-green-400">
+									<div className="flex items-center gap-2 rounded-xl border border-brand-blue bg-brand-blue/10 p-4 text-sm text-brand-blue dark:border-brand-cyan dark:bg-brand-cyan/10 dark:text-brand-cyan">
 										<CheckCircle2 className="h-5 w-5 shrink-0" />
 										Thank you! Your application has been sent successfully.
 									</div>
 								)}
 								{submitStatus === 'error' && (
-									<div className="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700 dark:border-red-800 dark:bg-red-950/30 dark:text-red-400">
+									<div className="rounded-xl border border-brand-blue bg-brand-blue/10 p-4 text-sm text-brand-blue dark:border-brand-cyan dark:bg-brand-cyan/10 dark:text-brand-cyan">
 										We couldn&apos;t send your application. Please try again or email us directly.
 									</div>
 								)}

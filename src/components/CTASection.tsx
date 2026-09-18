@@ -11,7 +11,7 @@ export default function CTASection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.5 }}
-          className="relative overflow-hidden rounded-card bg-navy-gradient px-6 py-16 text-center shadow-glow sm:px-12 md:py-24"
+          className="relative overflow-hidden rounded-[30px] bg-navy-gradient px-6 py-16 text-center shadow-glow sm:px-12 md:py-24"
         >
           <div className="blob -left-20 top-0 h-72 w-72 bg-brand-blue" />
           <div className="blob -right-20 bottom-0 h-72 w-72 bg-brand-purple" />

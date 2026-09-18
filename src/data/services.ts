@@ -5,6 +5,9 @@ import {
   MapPin,
   BarChart3,
   Boxes,
+  TrendingUp,
+  Users,
+  Lightbulb,
   type LucideIcon,
 } from 'lucide-react';
 
@@ -147,6 +150,36 @@ export const services: Service[] = [
       { q: 'Can you integrate with our existing systems?', a: 'Yes. We work with existing APIs, databases, and third-party tools to connect your systems and automate workflows.' },
     ],
   },
+  {
+    slug: 'business-growth-solutions',
+    title: 'Business Growth Solutions',
+    shortTitle: 'Business Growth',
+    description: 'Practical strategy, analytics, and digital systems that help teams make better growth decisions.',
+    icon: TrendingUp,
+    features: ['Growth planning', 'Conversion journey review', 'Analytics setup', 'Campaign direction', 'Performance reviews'],
+    technologies: ['Analytics', 'CRM', 'Dashboards', 'Conversion strategy'],
+    faqs: [{ q: 'Who are growth solutions for?', a: 'They are for businesses that need a clearer connection between digital activity, customer journeys, and business goals.' }],
+  },
+  {
+    slug: 'hr-recruitment',
+    title: 'HR & Recruitment Services',
+    shortTitle: 'HR & Recruitment',
+    description: 'Thoughtful hiring support and people operations for growing teams building their next chapter.',
+    icon: Users,
+    features: ['Role definition', 'Candidate sourcing', 'Screening support', 'Hiring workflow design', 'Employer presence'],
+    technologies: ['Applicant workflows', 'Structured interviews', 'Role scorecards', 'People operations'],
+    faqs: [{ q: 'Can you support a growing hiring team?', a: 'Yes. We can help clarify roles, structure the process, and support focused hiring for technology and business teams.' }],
+  },
+  {
+    slug: 'technology-business-consulting',
+    title: 'Technology & Business Consulting',
+    shortTitle: 'Consulting',
+    description: 'Independent guidance for technology choices, digital priorities, process improvement, and delivery planning.',
+    icon: Lightbulb,
+    features: ['Technology planning', 'Digital audits', 'Process mapping', 'Delivery roadmaps', 'Vendor and stack guidance'],
+    technologies: ['Discovery workshops', 'Roadmaps', 'Process design', 'Technical reviews'],
+    faqs: [{ q: 'When should we bring in a consultant?', a: 'Bring us in when a technology or growth decision feels unclear, expensive, or difficult to connect to a measurable business outcome.' }],
+  },
 ];
 
 export const serviceStrip = [
@@ -165,5 +198,8 @@ export const serviceDropdown = [
   'Google Business Profile Optimization',
   'Data Analysis & Data Science',
   'Custom Software',
+  'Business Growth Solutions',
+  'HR & Recruitment Services',
+  'Technology & Business Consulting',
   'Other',
 ];

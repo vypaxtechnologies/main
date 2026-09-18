@@ -1,40 +1,31 @@
 export interface Review {
   id: string;
   name: string;
-  rating: number;
+  category: string;
   text: string;
-  photo?: string;
+  outcome: string;
 }
 
 export const reviews: Review[] = [
   {
-    id: 'rahul-sharma',
-    name: 'Rahul Sharma',
-    rating: 5,
-    text: 'Vypax Technologies delivered a clean, modern website for our business. Their communication was excellent, and the development process was smooth and professional.',
+    id: 'professional-services-story',
+    name: 'Professional services team',
+    category: 'Website & positioning',
+    text: 'The project helped the team turn a complex service offering into a clearer digital experience that was easier for prospects to understand.',
+    outcome: 'Clearer story, smoother enquiry journey',
   },
   {
-    id: 'priya-singh',
-    name: 'Priya Singh',
-    rating: 4.5,
-    text: 'The team understood our requirements very well and helped us build a professional digital presence. Their attention to detail and support were impressive.',
+    id: 'local-business-story',
+    name: 'Local business team',
+    category: 'Local visibility',
+    text: 'The work brought the website, local presence, and customer journey into one consistent experience instead of treating each channel separately.',
+    outcome: 'More consistent presence across touchpoints',
   },
   {
-    id: 'amit-kapoor',
-    name: 'Amit Kapoor',
-    rating: 4.5,
-    text: 'Vypax Technologies understood our business goals and created a fast, responsive, and easy-to-use website. We were happy with the final result.',
-  },
-  {
-    id: 'neha-mehta',
-    name: 'Neha Mehta',
-    rating: 4.5,
-    text: 'The team helped improve our online presence with creative ideas and effective digital solutions. They were supportive throughout the project.',
-  },
-  {
-    id: 'vikram-saini',
-    name: 'Vikram Saini',
-    rating: 4.5,
-    text: 'A very professional team that provides practical solutions. Our website looks modern and represents our brand perfectly.',
+    id: 'growth-team-story',
+    name: 'Growth-focused team',
+    category: 'Digital growth system',
+    text: 'The collaboration gave the team a practical foundation for testing ideas, learning from user behaviour, and improving the experience over time.',
+    outcome: 'A stronger foundation for informed decisions',
   },
 ];

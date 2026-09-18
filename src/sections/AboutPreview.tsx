@@ -17,16 +17,16 @@ export default function AboutPreview() {
               center={false}
             />
 
-            <div className="mt-6 border-l-2 border-brand-blue pl-4 dark:border-brand-cyan">
-              <h3 className="text-sm font-semibold text-navy-900 dark:text-white">What We Believe</h3>
-              <p className="mt-1 text-sm leading-relaxed text-[var(--text-muted)]">
+            <div className="mt-6 rounded-2xl border border-[var(--border)] bg-[var(--bg-subtle)] p-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-blue dark:text-brand-cyan">What We Believe</p>
+              <p className="mt-2 text-sm leading-relaxed text-[var(--text-muted)]">
                 Technology should solve a business problem, not simply exist for the sake of technology.
               </p>
             </div>
 
             <div className="mt-8 space-y-5">
               <div className="flex gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-gradient text-white">
+                <div className="icon-tile h-10 w-10 shrink-0">
                   <Target className="h-5 w-5" />
                 </div>
                 <div>
@@ -37,7 +37,7 @@ export default function AboutPreview() {
                 </div>
               </div>
               <div className="flex gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-gradient text-white">
+                <div className="icon-tile h-10 w-10 shrink-0">
                   <Eye className="h-5 w-5" />
                 </div>
                 <div>
@@ -48,7 +48,7 @@ export default function AboutPreview() {
                 </div>
               </div>
               <div className="flex gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-gradient text-white">
+                <div className="icon-tile h-10 w-10 shrink-0">
                   <Heart className="h-5 w-5" />
                 </div>
                 <div>
@@ -78,7 +78,7 @@ export default function AboutPreview() {
             className="relative"
           >
             <div className="absolute inset-0 rounded-card bg-brand-gradient opacity-10 blur-3xl" />
-            <div className="relative overflow-hidden rounded-card border border-[var(--border)] bg-[var(--card)] p-8 shadow-card">
+            <div className="relative overflow-hidden rounded-[28px] border border-[var(--border)] bg-[var(--card)] p-8 shadow-card">
               <div className="grid grid-cols-2 gap-4">
                 {aboutValues.map((v, i) => (
                   <motion.div

@@ -15,7 +15,7 @@ export default function ServiceStrip() {
                 key={item.name}
                 className="flex min-w-[180px] items-center gap-3 md:min-w-0 md:flex-col md:items-start md:gap-2"
               >
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-gradient text-white">
+                <div className="icon-tile h-10 w-10 shrink-0">
                   <Icon className="h-5 w-5" />
                 </div>
                 <div>
