@@ -4,23 +4,23 @@
 
 @layer base {
   :root {
-     --bg: #DCDCDC;
-     --bg-subtle: #E8E8E8;
+     --bg: #eeecec;
+     --bg-subtle: #f1eeee;
     --text: #0D47A1;
-    --text-muted: #2196F3;
+    --text-muted: #000000;
      --border: #B8C7D1;
      --card: #F7FAFC;
      --shadow-soft: #AEBCC6;
   }
 
   .dark {
-     --bg: #0B0F19;
-     --bg-subtle: #111A2A;
+     --bg: #0A0E1A;
+     --bg-subtle: #101828;
      --text: #E3F2FD;
-    --text-muted: #90CAF9;
-     --border: #263B58;
-     --card: #131D2D;
-     --shadow-soft: #070A11;
+    --text-muted: #E0E4EA;
+     --border: #1E3050;
+     --card: #121A2B;
+     --shadow-soft: #050810;
   }
 
   html {
@@ -43,7 +43,7 @@
 
   .dark body {
     background:
-      linear-gradient(135deg, #0B0F19 0%, #111A2A 58%, #0D47A1 150%);
+      linear-gradient(135deg, #0A0E1A 0%, #101828 55%, #0F1D35 100%);
   }
 
   a {
@@ -161,19 +161,6 @@
 @layer utilities {
   .text-balance {
     text-wrap: balance;
-  }
-
-  .bg-grid {
-    background-image:
-      linear-gradient(to right, #90CAF9 1px, transparent 1px),
-      linear-gradient(to bottom, #90CAF9 1px, transparent 1px);
-    background-size: 48px 48px;
-  }
-
-  .dark .bg-grid {
-    background-image:
-      linear-gradient(to right, #2196F3 1px, transparent 1px),
-      linear-gradient(to bottom, #2196F3 1px, transparent 1px);
   }
 
   .bg-noise {

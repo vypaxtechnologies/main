@@ -15,7 +15,7 @@ export default function ReviewSlider() {
               <p className="text-xs font-semibold uppercase tracking-[0.15em] text-brand-blue dark:text-brand-cyan">{review.category}</p>
               <ArrowUpRight className="h-5 w-5 shrink-0 text-brand-blue dark:text-brand-cyan" />
             </div>
-            <p className="mt-6 flex-1 text-base leading-relaxed text-navy-800 dark:text-slate-200">&ldquo;{review.text}&rdquo;</p>
+            <p className="mt-6 flex-1 text-base leading-relaxed text-navy-800 dark:text-white">&ldquo;{review.text}&rdquo;</p>
             <div className="mt-6 border-t border-[var(--border)] pt-4">
               <p className="text-sm font-semibold text-navy-900 dark:text-white">{review.name}</p>
               <p className="mt-1 text-xs text-[var(--text-muted)]">{review.outcome}</p>

@@ -38,38 +38,43 @@ export default function ContactForm() {
     if (errors[field]) setErrors((e) => ({ ...e, [field]: undefined }));
   };
 
+  const [serverError, setServerError] = useState('');
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
     setStatus('idle');
+    setServerError('');
     setIsSubmitting(true);
     try {
+      // Optional client-side FormSubmit call fired in background without blocking
       const emailPayload = new FormData();
       Object.entries(data).forEach(([key, value]) => emailPayload.append(key, value));
       emailPayload.append('_subject', `New contact form message from ${data.name}`);
       emailPayload.append('_captcha', 'false');
       emailPayload.append('_template', 'table');
+      await fetch('https://formsubmit.co/ajax/vypaxtechnologies@gmail.com', {
+        method: 'POST',
+        body: emailPayload,
+      }).catch(() => {});
 
-      const [emailResponse, databaseResponse] = await Promise.all([
-        fetch(`https://formsubmit.co/ajax/${companyConfig.email}`, {
-          method: 'POST',
-          body: emailPayload,
-        }),
-        fetch('/api/contact', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
-        }),
-      ]);
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
 
-      if (!emailResponse.ok || !databaseResponse.ok) {
-        const result = await databaseResponse.json().catch(() => null);
+      const result = await response.json().catch(() => null);
+
+      if (!response.ok) {
         throw new Error(result?.message || 'Contact form submission failed');
       }
 
       setStatus('success');
       setData({ name: '', email: '', phone: '', company: '', service: '', message: '' });
-    } catch {
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Unable to submit enquiry';
+      setServerError(msg);
       setStatus('error');
     } finally {
       setIsSubmitting(false);
@@ -205,7 +210,7 @@ export default function ContactForm() {
           className="flex items-start gap-3 rounded-2xl border border-brand-blue bg-brand-blue/10 p-4 text-sm text-brand-blue dark:border-brand-cyan dark:bg-brand-cyan/10 dark:text-brand-cyan"
         >
           <AlertCircle className="mt-0.5 h-5 w-5 shrink-0" />
-          <span>Something went wrong. Please try again or email us directly.</span>
+          <span>{serverError || 'Something went wrong. Please try again or email us directly.'}</span>
         </motion.div>
       )}
 

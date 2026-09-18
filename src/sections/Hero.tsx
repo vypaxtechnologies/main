@@ -80,15 +80,6 @@ export default function Hero() {
             <motion.p
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="mt-5 max-w-xl text-lg font-medium text-navy-800 dark:text-slate-200"
-            >
-              Thoughtful websites, digital systems, and marketing experiences designed to feel natural, convert better, and scale with your goals.
-            </motion.p>
-
-            <motion.p
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
               className="mt-4 max-w-lg text-base leading-relaxed text-[var(--text-muted)] sm:text-lg"
             >

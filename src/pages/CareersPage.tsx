@@ -1,60 +1,61 @@
 import { useState } from 'react';
 import { useSEO } from '@/hooks/useSEO';
-import { ArrowRight, Briefcase, CheckCircle2, X } from 'lucide-react';
+import { ArrowRight, Briefcase, CheckCircle2, LoaderCircle, AlertCircle, X } from 'lucide-react';
 import SectionHeading from '@/components/SectionHeading';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import { careers } from '@/data/faq';
-import { companyConfig } from '@/data/company';
 
 export default function CareersPage() {
 	useSEO({ title: 'Careers | Vypax Technologies', description: 'Build your future with Vypax Technologies. We are building a team that loves technology, creativity and meaningful business impact.' });
 	const [selectedRole, setSelectedRole] = useState<string | null>(null);
 	const [hasExperience, setHasExperience] = useState('');
 	const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [errorMessage, setErrorMessage] = useState('');
 
 	const openApplication = (roleTitle: string) => {
 		setSelectedRole(roleTitle);
 		setHasExperience('');
 		setSubmitStatus('idle');
+		setErrorMessage('');
 		window.setTimeout(() => document.getElementById('application-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 0);
 	};
 
 	const closeApplication = () => {
 		setSelectedRole(null);
 		setSubmitStatus('idle');
+		setErrorMessage('');
 	};
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		setSubmitStatus('idle');
+		setErrorMessage('');
+		setIsSubmitting(true);
 		const form = event.currentTarget;
-		const emailPayload = new FormData(form);
 		const databasePayload = new FormData(form);
 		const resume = databasePayload.get('_attachment');
 		databasePayload.append('role', selectedRole ?? 'General application');
 		databasePayload.append('resumeName', resume instanceof File ? resume.name : '');
-		emailPayload.append('_subject', `New job application for ${selectedRole}`);
-		emailPayload.append('_role', selectedRole ?? 'General application');
-		emailPayload.append('_captcha', 'false');
-		emailPayload.append('_template', 'table');
 
 		try {
-			const [emailResponse, databaseResponse] = await Promise.all([
-				fetch(`https://formsubmit.co/ajax/${companyConfig.email}`, {
-					method: 'POST',
-					body: emailPayload,
-				}),
-				fetch('/api/careers', {
-					method: 'POST',
-					body: databasePayload,
-				}),
-			]);
-			if (!emailResponse.ok || !databaseResponse.ok) throw new Error('Application submission failed');
+			const response = await fetch('/api/careers', {
+				method: 'POST',
+				body: databasePayload,
+			});
+			const result = await response.json().catch(() => null);
+			if (!response.ok) {
+				throw new Error(result?.message || 'Application submission failed');
+			}
 			setSubmitStatus('success');
 			form.reset();
 			setHasExperience('');
-		} catch {
+		} catch (err: unknown) {
+			const msg = err instanceof Error ? err.message : 'Unable to submit application right now.';
+			setErrorMessage(msg);
 			setSubmitStatus('error');
+		} finally {
+			setIsSubmitting(false);
 		}
 	};
 
@@ -151,12 +152,17 @@ export default function CareersPage() {
 									</div>
 								)}
 								{submitStatus === 'error' && (
-									<div className="rounded-xl border border-brand-blue bg-brand-blue/10 p-4 text-sm text-brand-blue dark:border-brand-cyan dark:bg-brand-cyan/10 dark:text-brand-cyan">
-										We couldn&apos;t send your application. Please try again or email us directly.
+									<div className="flex items-center gap-2 rounded-xl border border-brand-blue bg-brand-blue/10 p-4 text-sm text-brand-blue dark:border-brand-cyan dark:bg-brand-cyan/10 dark:text-brand-cyan">
+										<AlertCircle className="h-5 w-5 shrink-0" />
+										{errorMessage || "We couldn't send your application. Please try again or email us directly."}
 									</div>
 								)}
 
-								<button type="submit" className="btn-primary w-full sm:w-auto">Submit Application <ArrowRight className="h-4 w-4" /></button>
+								<button type="submit" disabled={isSubmitting} className="btn-primary w-full sm:w-auto disabled:cursor-not-allowed disabled:opacity-70">
+									{isSubmitting ? <LoaderCircle className="h-4 w-4 animate-spin" /> : null}
+									{isSubmitting ? 'Submitting Application...' : 'Submit Application'}
+									{!isSubmitting && <ArrowRight className="h-4 w-4" />}
+								</button>
 							</form>
 						</div>
 					)}

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Mail, MapPin, Phone, Linkedin, Instagram, Twitter, Facebook } from 'lucide-react';
 import Logo from './Logo';
+import NewsletterForm from './NewsletterForm';
 import { companyConfig } from '@/data/company';
 import { services } from '@/data/services';
 
@@ -108,6 +109,23 @@ export default function Footer() {
               >
                 {companyConfig.email}
               </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-12 rounded-3xl border border-[var(--border)] bg-[var(--card)] p-6 sm:p-8 shadow-soft">
+          <div className="grid gap-6 lg:grid-cols-[1.2fr_1fr] lg:items-center">
+            <div>
+              <span className="eyebrow">Newsletter</span>
+              <h3 className="mt-2 text-lg font-bold text-navy-900 dark:text-white sm:text-xl">
+                Stay updated with modern tech insights
+              </h3>
+              <p className="mt-1 text-sm text-[var(--text-muted)]">
+                Get practical digital strategy, software engineering tips, and career guides directly to your inbox.
+              </p>
+            </div>
+            <div>
+              <NewsletterForm />
             </div>
           </div>
         </div>

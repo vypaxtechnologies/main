@@ -81,6 +81,7 @@ const perks = [
 export default function TrainingDevelopmentPage() {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   useSEO({
     title: 'Training & Development | Vypax Technologies',
@@ -90,22 +91,47 @@ export default function TrainingDevelopmentPage() {
   const handleTrainingSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setSubmitStatus('idle');
+    setErrorMessage('');
     setIsSubmitting(true);
     const form = event.currentTarget;
     const payload = new FormData(form);
-    payload.append('_subject', 'New Training & Development enquiry');
-    payload.append('_captcha', 'false');
-    payload.append('_template', 'table');
+
+    const data = {
+      fullName: String(payload.get('fullName') || '').trim(),
+      email: String(payload.get('email') || '').trim(),
+      phone: String(payload.get('phone') || '').trim(),
+      background: String(payload.get('background') || '').trim(),
+      course: String(payload.get('course') || '').trim(),
+      message: String(payload.get('message') || '').trim(),
+    };
 
     try {
-      const response = await fetch(`https://formsubmit.co/ajax/${companyConfig.email}`, {
+      // Optional background client-side FormSubmit call
+      payload.append('_subject', 'New Training & Development enquiry');
+      payload.append('_captcha', 'false');
+      payload.append('_template', 'table');
+      fetch(`https://formsubmit.co/ajax/${companyConfig.email}`, {
         method: 'POST',
         body: payload,
+      }).catch(() => {});
+
+      const response = await fetch('/api/training', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
       });
-      if (!response.ok) throw new Error('Training enquiry submission failed');
+
+      const result = await response.json().catch(() => null);
+
+      if (!response.ok) {
+        throw new Error(result?.message || 'Training enquiry submission failed');
+      }
+
       setSubmitStatus('success');
       form.reset();
-    } catch {
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : "We couldn't send your enquiry. Please try again or email us directly.";
+      setErrorMessage(msg);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
@@ -263,7 +289,7 @@ export default function TrainingDevelopmentPage() {
               <label className="mt-5 block text-sm font-semibold text-navy-900 dark:text-white">Learning Goals *<textarea name="message" required rows={5} className="input-field mt-2 resize-none" placeholder="Tell us what you want to learn or build..." /></label>
 
               {submitStatus === 'success' && <div className="mt-5 flex items-center gap-3 rounded-xl border border-brand-blue bg-brand-blue/10 p-4 text-sm text-brand-blue dark:border-brand-cyan dark:text-brand-cyan"><CheckCircle2 className="h-5 w-5 shrink-0" />Thank you! We&apos;ll contact you with the next steps.</div>}
-              {submitStatus === 'error' && <div className="mt-5 flex items-center gap-3 rounded-xl border border-brand-blue bg-brand-blue/10 p-4 text-sm text-brand-blue dark:border-brand-cyan dark:text-brand-cyan"><AlertCircle className="h-5 w-5 shrink-0" />We couldn&apos;t send your enquiry. Please try again or email us directly.</div>}
+              {submitStatus === 'error' && <div className="mt-5 flex items-center gap-3 rounded-xl border border-brand-blue bg-brand-blue/10 p-4 text-sm text-brand-blue dark:border-brand-cyan dark:text-brand-cyan"><AlertCircle className="h-5 w-5 shrink-0" />{errorMessage || "We couldn't send your enquiry. Please try again or email us directly."}</div>}
 
               <button type="submit" disabled={isSubmitting} className="btn-primary mt-6 w-full sm:w-auto disabled:cursor-not-allowed disabled:opacity-70">
                 {isSubmitting ? <LoaderCircle className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}

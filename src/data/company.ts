@@ -21,10 +21,11 @@ export const companyConfig = {
     { label: 'Projects', path: '/projects' },
     { label: 'About', path: '/about' },
     { label: 'Contact', path: '/contact' },
+    { label: 'Careers', path: '/careers' },
   ],
   exploreNav: [
-    { label: 'Solutions', path: '/solutions', description: 'Solutions shaped around your market.' },
-    { label: 'Projects', path: '/projects', description: 'See the kind of work we can build.' },
+
+
     { label: 'Training & Development', path: '/training-development', description: 'Build practical technology and digital skills.' },
     { label: 'Blog', path: '/blog', description: 'Practical ideas for digital growth.' },
     { label: 'Careers', path: '/careers', description: 'Join a thoughtful, growing team.' },

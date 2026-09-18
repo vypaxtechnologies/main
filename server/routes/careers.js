@@ -2,13 +2,19 @@ import { Router } from 'express';
 import multer from 'multer';
 import CareerApplication from '../models/CareerApplication.js';
 
+
 const router = Router();
 const upload = multer({
   storage: multer.memoryStorage(),
   limits: { fileSize: 10 * 1024 * 1024 },
   fileFilter: (_req, file, callback) => {
-    const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
-    callback(null, allowedTypes.includes(file.mimetype));
+    const allowedTypes = [
+      'application/pdf',
+      'application/msword',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+      'application/octet-stream', // some browsers send pdf as octet-stream
+    ];
+    callback(null, allowedTypes.includes(file.mimetype) || /\.(pdf|doc|docx)$/i.test(file.originalname));
   },
 });
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -37,10 +43,21 @@ router.post('/', upload.single('_attachment'), async (req, res) => {
 
     const savedApplication = await CareerApplication.create({
       ...application,
+      fullName: String(application.fullName).trim(),
+      email: String(application.email).trim().toLowerCase(),
+      phone: String(application.phone).trim(),
+      location: String(application.location).trim(),
+      linkedin: String(application.linkedin).trim(),
+      portfolio: String(application.portfolio).trim(),
       resumeData: req.file.buffer,
       resumeMimeType: req.file.mimetype,
     });
-    return res.status(201).json({ id: savedApplication.id, message: 'Your application has been received.' });
+
+
+    return res.status(201).json({
+      id: savedApplication.id,
+      message: 'Your application has been received. Our recruitment team will review it shortly.',
+    });
   } catch (error) {
     console.error('Career application failed:', error);
     return res.status(500).json({ message: 'Unable to save your application right now.' });

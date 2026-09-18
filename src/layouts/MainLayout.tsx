@@ -7,7 +7,7 @@ import ScrollToTop from '@/components/ScrollToTop';
 import Chatbot from '@/components/Chatbot';
 import FloatingContactButton from '@/components/FloatingContactButton';
 import SearchFloatingButton from '@/components/SearchFloatingButton';
-import MouseTechFollower from '@/components/MouseTechFollower';
+
 import { useTheme } from '@/hooks/useTheme';
 
 export default function MainLayout() {
@@ -64,7 +64,6 @@ export default function MainLayout() {
       <SearchFloatingButton />
       <FloatingContactButton />
       <Chatbot />
-      <MouseTechFollower />
     </div>
   );
 }
