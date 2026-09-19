@@ -3,7 +3,6 @@ import { AlertCircle, ArrowRight, BarChart3, BriefcaseBusiness, CheckCircle2, Co
 import { useSEO } from '@/hooks/useSEO';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import SectionHeading from '@/components/SectionHeading';
-import CTASection from '@/components/CTASection';
 import { companyConfig } from '@/data/company';
 
 const programs = [
@@ -280,13 +279,13 @@ export default function TrainingDevelopmentPage() {
 
             <form onSubmit={handleTrainingSubmit} className="rounded-[28px] border border-[var(--border)] bg-[var(--card)] p-6 shadow-card sm:p-8" noValidate>
               <div className="grid gap-5 sm:grid-cols-2">
-                <label className="text-sm font-semibold text-navy-900 dark:text-white">Full Name *<input name="fullName" type="text" required className="input-field mt-2" placeholder="Your full name" /></label>
-                <label className="text-sm font-semibold text-navy-900 dark:text-white">Email Address *<input name="email" type="email" required className="input-field mt-2" placeholder="you@example.com" /></label>
-                <label className="text-sm font-semibold text-navy-900 dark:text-white">Phone Number *<input name="phone" type="tel" required className="input-field mt-2" placeholder="+91 00000 00000" /></label>
-                <label className="text-sm font-semibold text-navy-900 dark:text-white">Current Background<input name="background" type="text" className="input-field mt-2" placeholder="Student, graduate, professional..." /></label>
-                <label className="text-sm font-semibold text-navy-900 dark:text-white">Choose a Course *<select name="course" required className="input-field mt-2"><option value="">Select a course</option>{learningTracks.flatMap((track) => track.courses).map((course) => <option key={course.name} value={course.name}>{course.name}</option>)}</select></label>
+                <label className="text-sm font-semibold text-navy-900 dark:text-white">Full Name *<input name="fullName" type="text" required className="input-field mt-2" placeholder="Your full name" autoComplete="name" /></label>
+                <label className="text-sm font-semibold text-navy-900 dark:text-white">Email Address *<input name="email" type="email" required className="input-field mt-2" placeholder="you@example.com" autoComplete="email" /></label>
+                <label className="text-sm font-semibold text-navy-900 dark:text-white">Phone Number *<input name="phone" type="tel" required className="input-field mt-2" placeholder="+91 00000 00000" autoComplete="tel" /></label>
+                <label className="text-sm font-semibold text-navy-900 dark:text-white">Current Background<input name="background" type="text" className="input-field mt-2" placeholder="Student, graduate, professional..." autoComplete="off" /></label>
+                <label className="text-sm font-semibold text-navy-900 dark:text-white">Choose a Course *<select name="course" required className="input-field mt-2" autoComplete="off"><option value="">Select a course</option>{learningTracks.flatMap((track) => track.courses).map((course) => <option key={course.name} value={course.name}>{course.name}</option>)}</select></label>
               </div>
-              <label className="mt-5 block text-sm font-semibold text-navy-900 dark:text-white">Learning Goals *<textarea name="message" required rows={5} className="input-field mt-2 resize-none" placeholder="Tell us what you want to learn or build..." /></label>
+              <label className="mt-5 block text-sm font-semibold text-navy-900 dark:text-white">Learning Goals *<textarea name="message" required rows={5} className="input-field mt-2 resize-none" placeholder="Tell us what you want to learn or build..." autoComplete="off" /></label>
 
               {submitStatus === 'success' && <div className="mt-5 flex items-center gap-3 rounded-xl border border-brand-blue bg-brand-blue/10 p-4 text-sm text-brand-blue dark:border-brand-cyan dark:text-brand-cyan"><CheckCircle2 className="h-5 w-5 shrink-0" />Thank you! We&apos;ll contact you with the next steps.</div>}
               {submitStatus === 'error' && <div className="mt-5 flex items-center gap-3 rounded-xl border border-brand-blue bg-brand-blue/10 p-4 text-sm text-brand-blue dark:border-brand-cyan dark:text-brand-cyan"><AlertCircle className="h-5 w-5 shrink-0" />{errorMessage || "We couldn't send your enquiry. Please try again or email us directly."}</div>}
@@ -300,8 +299,6 @@ export default function TrainingDevelopmentPage() {
           </div>
         </div>
       </section>
-
-      <CTASection />
     </>
   );
 }

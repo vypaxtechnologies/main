@@ -6,6 +6,7 @@ import { companyConfig } from '@/data/company';
 interface Message {
   role: 'bot' | 'user';
   text: string;
+  html?: string;
 }
 
 const quickActions = [
@@ -45,7 +46,7 @@ function getBotResponse(input: string): string {
   if (q.includes('career') || q.includes('job') || q.includes('hiring') || q.includes('join'))
     return 'Open roles and application details are available on the Careers page. You can also contact the team with your background and the kind of work you want to contribute to.';
   if (q.includes('contact') || q.includes('email') || q.includes('reach'))
-    return `You can reach us at ${companyConfig.email} or visit our contact page. We're based in ${companyConfig.location}.`;
+    return `You can reach us at <a href="mailto:${companyConfig.email}" class="text-brand-blue dark:text-brand-cyan underline hover:opacity-80">${companyConfig.email}</a> or visit our contact page. We're based in ${companyConfig.location}.`;
   if (q.includes('location') || q.includes('where'))
     return `We're based in ${companyConfig.location}, and we work with clients across India and remotely.`;
   if (q.includes('process') || q.includes('how do you work') || q.includes('start'))
@@ -53,7 +54,7 @@ function getBotResponse(input: string): string {
   if (q.includes('support') || q.includes('maintenance'))
     return 'Yes, we provide ongoing maintenance and support plans for security updates, content changes, performance monitoring, and feature enhancements.';
   if (q.includes('team') || q.includes('talk'))
-    return `You can reach our team at ${companyConfig.email}. We'd be happy to schedule a free consultation.`;
+    return `You can reach our team at <a href="mailto:${companyConfig.email}" class="text-brand-blue dark:text-brand-cyan underline hover:opacity-80">${companyConfig.email}</a>. We'd be happy to schedule a free consultation.`;
   if (q.includes('data') || q.includes('analytics') || q.includes('sales') || q.includes('dashboard'))
     return 'Our data and analytics work helps teams understand performance, customer behavior, sales patterns, and operational bottlenecks through dashboards and practical recommendations.';
   if (q.includes('thank') || q.includes('thanks'))
@@ -78,7 +79,9 @@ export default function Chatbot() {
     setMessages((m) => [...m, { role: 'user', text }]);
     setInput('');
     setTimeout(() => {
-      setMessages((m) => [...m, { role: 'bot', text: getBotResponse(text) }]);
+      const botText = getBotResponse(text);
+      const hasHtml = botText.includes('<a ');
+      setMessages((m) => [...m, { role: 'bot', text: botText, html: hasHtml ? botText : undefined }]);
     }, 500);
   };
 
@@ -112,15 +115,26 @@ export default function Chatbot() {
             <div ref={scrollRef} className="chat-scroll flex-1 space-y-3 overflow-y-auto p-4">
               {messages.map((msg, i) => (
                 <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  <div
-                    className={`max-w-[80%] rounded-2xl px-4 py-2.5 text-sm ${
-                      msg.role === 'user'
-                        ? 'bg-brand-gradient text-white'
-                        : 'bg-[var(--bg-subtle)] text-navy-900 dark:text-white'
-                    }`}
-                  >
-                    {msg.text}
-                  </div>
+                  {msg.html ? (
+                    <div
+                      className={`max-w-[80%] rounded-2xl px-4 py-2.5 text-sm ${
+                        msg.role === 'user'
+                          ? 'bg-brand-gradient text-white'
+                          : 'bg-[var(--bg-subtle)] text-navy-900 dark:text-white'
+                      }`}
+                      dangerouslySetInnerHTML={{ __html: msg.html }}
+                    />
+                  ) : (
+                    <div
+                      className={`max-w-[80%] rounded-2xl px-4 py-2.5 text-sm ${
+                        msg.role === 'user'
+                          ? 'bg-brand-gradient text-white'
+                          : 'bg-[var(--bg-subtle)] text-navy-900 dark:text-white'
+                      }`}
+                    >
+                      {msg.text}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>

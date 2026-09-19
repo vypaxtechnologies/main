@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { useSEO } from '@/hooks/useSEO';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import SectionHeading from '@/components/SectionHeading';
-import CTASection from '@/components/CTASection';
 import { industries } from '@/data/siteContent';
 
 export default function SolutionsPage() {
@@ -49,8 +48,6 @@ export default function SolutionsPage() {
           </div>
         </div>
       </section>
-
-      <CTASection />
     </>
   );
 }

@@ -21,7 +21,7 @@ export default function Navbar() {
 
   return (
     <header
-      className="fixed inset-x-3 top-3 z-50 rounded-2xl border border-white/40 bg-white/65 shadow-lg shadow-navy-900/5 backdrop-blur-xl transition-all duration-300 dark:border-white/10 dark:bg-navy-950/65 dark:shadow-black/20 sm:inset-x-5 md:top-4"
+      className="fixed inset-x-3 top-3 z-50 rounded-2xl border border-white/40 bg-white/80 shadow-lg shadow-navy-900/5 dark:border-white/10 dark:bg-navy-950/80 dark:shadow-black/20 sm:inset-x-5 md:top-4"
     >
       <nav className="container-x flex h-16 items-center justify-between md:h-20">
         <Logo />

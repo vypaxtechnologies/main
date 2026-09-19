@@ -15,12 +15,12 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-[var(--border)] bg-[var(--bg-subtle)]">
-      <div className="container-x py-16">
-        <div className="grid gap-12 lg:grid-cols-4">
-          <div className="lg:col-span-1">
+    <footer className="border-t border-[var(--border)] bg-[var(--bg)]">
+      <div className="container-x py-16 sm:py-20">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-3">
             <Logo />
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-[var(--text-muted)]">
+            <p className="mt-5 max-w-sm text-sm leading-relaxed text-[var(--text-muted)]">
               {companyConfig.tagline}. {companyConfig.slogan}.
             </p>
             <div className="mt-6 flex gap-3">
@@ -34,7 +34,7 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={key}
-                    className="flex h-9 w-9 items-center justify-center rounded-full border border-[var(--border)] text-[var(--text-muted)] transition-colors hover:border-brand-blue hover:text-brand-blue dark:hover:text-brand-cyan"
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--card)] text-[var(--text-muted)] transition-all duration-300 hover:-translate-y-1 hover:border-brand-blue hover:text-brand-blue dark:hover:text-brand-cyan"
                   >
                     <Icon className="h-4 w-4" />
                   </a>
@@ -43,89 +43,87 @@ export default function Footer() {
             </div>
           </div>
 
-          <div>
-            <h3 className="text-sm font-semibold text-navy-900 dark:text-white">Navigation</h3>
-            <ul className="mt-4 space-y-3">
-              {companyConfig.nav.map((item) => (
-                <li key={item.path}>
-                  <Link
-                    to={item.path}
-                    className="text-sm text-[var(--text-muted)] transition-colors hover:text-brand-blue dark:hover:text-brand-cyan"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <div className="lg:col-span-9 grid grid-cols-2 gap-8 sm:grid-cols-3">
+            <div>
+              <h4 className="text-sm font-semibold text-navy-900 dark:text-white">Navigation</h4>
+              <ul className="mt-5 space-y-3.5">
+                {companyConfig.nav.map((item) => (
+                  <li key={item.path}>
+                    <Link
+                      to={item.path}
+                      className="group inline-flex items-center text-sm text-[var(--text-muted)] transition-colors hover:text-brand-blue dark:hover:text-brand-cyan"
+                    >
+                      <span className="h-px w-0 bg-brand-blue transition-all duration-300 group-hover:w-2" />
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          <div>
-            <h3 className="text-sm font-semibold text-navy-900 dark:text-white">Services</h3>
-            <ul className="mt-4 space-y-3">
-              {services.map((s) => (
-                <li key={s.slug}>
-                  <Link
-                    to={`/services/${s.slug}`}
-                    className="text-sm text-[var(--text-muted)] transition-colors hover:text-brand-blue dark:hover:text-brand-cyan"
-                  >
-                    {s.shortTitle}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+            <div>
+              <h4 className="text-sm font-semibold text-navy-900 dark:text-white">Services</h4>
+              <ul className="mt-5 space-y-3.5">
+                {services.map((s) => (
+                  <li key={s.slug}>
+                    <Link
+                      to={`/services/${s.slug}`}
+                      className="group inline-flex items-center text-sm text-[var(--text-muted)] transition-colors hover:text-brand-blue dark:hover:text-brand-cyan"
+                    >
+                      <span className="h-px w-0 bg-brand-blue transition-all duration-300 group-hover:w-2" />
+                      {s.shortTitle}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          <div>
-            <h3 className="text-sm font-semibold text-navy-900 dark:text-white">Contact</h3>
-            <ul className="mt-4 space-y-3">
-              <li className="flex items-start gap-2 text-sm text-[var(--text-muted)]">
-                <MapPin className="mt-0.5 h-4 w-4 shrink-0" />
-                {companyConfig.location}
-              </li>
-              <li>
-                <a
-                  href={`tel:${companyConfig.whatsappNumber}`}
-                  className="flex items-start gap-2 text-sm text-[var(--text-muted)] transition-colors hover:text-brand-blue dark:hover:text-brand-cyan"
-                >
-                  <Phone className="mt-0.5 h-4 w-4 shrink-0" />
-                  {companyConfig.phone}
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`mailto:${companyConfig.email}`}
-                  className="flex items-start gap-2 text-sm text-[var(--text-muted)] transition-colors hover:text-brand-blue dark:hover:text-brand-cyan"
-                >
-                  <Mail className="mt-0.5 h-4 w-4 shrink-0" />
-                  {companyConfig.email}
-                </a>
-              </li>
-            </ul>
-            <div className="mt-4 space-y-1">
-              <a
-                href={`mailto:${companyConfig.email}`}
-                className="block text-xs text-[var(--text-muted)] transition-colors hover:text-brand-blue dark:hover:text-brand-cyan"
-              >
-                {companyConfig.email}
-              </a>
+            <div className="col-span-2 sm:col-span-1">
+              <h4 className="text-sm font-semibold text-navy-900 dark:text-white">Contact</h4>
+              <ul className="mt-5 space-y-4">
+                <li className="flex items-start gap-3 text-sm text-[var(--text-muted)]">
+                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand-blue dark:text-brand-cyan" />
+                  <span>{companyConfig.location}</span>
+                </li>
+                <li>
+                  <a
+                    href={`tel:${companyConfig.whatsappNumber}`}
+                    className="flex items-start gap-3 text-sm text-[var(--text-muted)] transition-colors hover:text-brand-blue dark:hover:text-brand-cyan"
+                  >
+                    <Phone className="mt-0.5 h-4 w-4 shrink-0 text-brand-blue dark:text-brand-cyan" />
+                    <span>{companyConfig.phone}</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={`mailto:${companyConfig.email}`}
+                    className="flex items-start gap-3 text-sm text-[var(--text-muted)] transition-colors hover:text-brand-blue dark:hover:text-brand-cyan"
+                  >
+                    <Mail className="mt-0.5 h-4 w-4 shrink-0 text-brand-blue dark:text-brand-cyan" />
+                    <span className="break-all">{companyConfig.email}</span>
+                  </a>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-[var(--border)] pt-8 sm:flex-row">
-          <p className="text-xs text-[var(--text-muted)]">
-            &copy; {year} {companyConfig.name}. All rights reserved.
-          </p>
-          <div className="flex gap-6">
-            <Link to="/privacy-policy" className="text-xs text-[var(--text-muted)] transition-colors hover:text-brand-blue dark:hover:text-brand-cyan">
-              Privacy Policy
-            </Link>
-            <Link to="/terms" className="text-xs text-[var(--text-muted)] transition-colors hover:text-brand-blue dark:hover:text-brand-cyan">
-              Terms &amp; Conditions
-            </Link>
-            <a href="#" className="text-xs text-[var(--text-muted)] transition-colors hover:text-brand-blue dark:hover:text-brand-cyan">
-              Cookie Policy
-            </a>
+        <div className="mt-16 border-t border-[var(--border)] pt-8">
+          <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
+            <p className="text-xs text-[var(--text-muted)]">
+              &copy; {year} {companyConfig.name}. All rights reserved.
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+              <Link to="/privacy-policy" className="text-xs text-[var(--text-muted)] transition-colors hover:text-brand-blue dark:hover:text-brand-cyan">
+                Privacy Policy
+              </Link>
+              <Link to="/terms" className="text-xs text-[var(--text-muted)] transition-colors hover:text-brand-blue dark:hover:text-brand-cyan">
+                Terms &amp; Conditions
+              </Link>
+              <a href="#" className="text-xs text-[var(--text-muted)] transition-colors hover:text-brand-blue dark:hover:text-brand-cyan">
+                Cookie Policy
+              </a>
+            </div>
           </div>
         </div>
       </div>

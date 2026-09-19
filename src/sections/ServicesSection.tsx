@@ -1,6 +1,5 @@
 import SectionHeading from '@/components/SectionHeading';
-import ServiceCard from '@/components/ServiceCard';
-import { services } from '@/data/services';
+import ServiceSlider from '@/components/ServiceSlider';
 
 export default function ServicesSection() {
   return (
@@ -11,10 +10,8 @@ export default function ServicesSection() {
           title="What We Do"
           subtitle="Technology and digital solutions designed around your business goals."
         />
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service, i) => (
-            <ServiceCard key={service.slug} service={service} index={i} />
-          ))}
+        <div className="mt-10">
+          <ServiceSlider />
         </div>
       </div>
     </section>

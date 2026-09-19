@@ -2,7 +2,6 @@ import { useState, type FormEvent } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, CheckCircle2, LoaderCircle, Send, Sparkles, AlertCircle } from 'lucide-react';
 import { serviceDropdown } from '@/data/services';
-import { companyConfig } from '@/data/company';
 
 interface FormData {
   name: string;
@@ -28,6 +27,7 @@ export default function ContactForm() {
     if (!data.name.trim()) e.name = 'Name is required';
     if (!data.email.trim()) e.email = 'Email is required';
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) e.email = 'Enter a valid email';
+    if (!data.phone.trim()) e.phone = 'Phone number is required';
     if (!data.message.trim()) e.message = 'Message is required';
     setErrors(e);
     return Object.keys(e).length === 0;
@@ -110,6 +110,7 @@ export default function ContactForm() {
             className="input-field"
             placeholder="e.g. Ankit Sharma"
             aria-invalid={!!errors.name}
+            autoComplete="name"
           />
           {errors.name && <p className="mt-1 text-xs text-brand-blue">{errors.name}</p>}
         </div>
@@ -125,12 +126,13 @@ export default function ContactForm() {
             className="input-field"
             placeholder="you@company.com"
             aria-invalid={!!errors.email}
+            autoComplete="email"
           />
           {errors.email && <p className="mt-1 text-xs text-brand-blue">{errors.email}</p>}
         </div>
         <div>
           <label htmlFor="phone" className="mb-2 block text-sm font-semibold text-navy-900 dark:text-white">
-            Phone number <span className="font-normal text-[var(--text-muted)]">(optional)</span>
+            Phone number <span className="text-brand-blue">*</span>
           </label>
           <input
             id="phone"
@@ -139,6 +141,7 @@ export default function ContactForm() {
             onChange={(e) => handleChange('phone', e.target.value)}
             className="input-field"
             placeholder="+91 00000 00000"
+            autoComplete="tel"
           />
         </div>
         <div>
@@ -152,6 +155,7 @@ export default function ContactForm() {
             onChange={(e) => handleChange('company', e.target.value)}
             className="input-field"
             placeholder="Your company name"
+            autoComplete="organization"
           />
         </div>
         </div>
@@ -166,6 +170,7 @@ export default function ContactForm() {
           value={data.service}
           onChange={(e) => handleChange('service', e.target.value)}
           className="input-field cursor-pointer"
+          autoComplete="off"
         >
           <option value="">Select a service</option>
           {serviceDropdown.map((s) => (
@@ -189,6 +194,7 @@ export default function ContactForm() {
           placeholder="What are you trying to achieve, and where are you currently stuck?"
           className="input-field resize-none"
           aria-invalid={!!errors.message}
+          autoComplete="off"
         />
         {errors.message && <p className="mt-1 text-xs text-brand-blue">{errors.message}</p>}
       </div>

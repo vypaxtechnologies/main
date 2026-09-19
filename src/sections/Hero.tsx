@@ -1,7 +1,7 @@
 import { useLayoutEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import gsap from 'gsap/gsap-core';
+import { gsap } from 'gsap';
 import { ArrowRight, Sparkles, Cloud, BarChart3, Smartphone, Database, Zap } from 'lucide-react';
 
 const floatingCards = [
@@ -57,15 +57,15 @@ export default function Hero() {
       <div className="container-x relative z-10">
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <div>
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="eyebrow inline-flex items-center gap-2 rounded-full border border-brand-blue/15 bg-white/60 px-3 py-2 backdrop-blur-sm dark:bg-white/5"
-            >
-              <Sparkles className="h-3.5 w-3.5" />
-              Strategy • Design • Growth
-            </motion.p>
+<motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="eyebrow inline-flex items-center gap-2 rounded-full border border-brand-blue/15 bg-white/90 px-3 py-2 dark:bg-white/5"
+          >
+            <Sparkles className="h-3.5 w-3.5" />
+            Strategy • Design • Growth
+          </motion.p>
 
             <motion.h1
               initial={{ opacity: 0, y: 24 }}

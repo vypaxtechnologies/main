@@ -103,17 +103,17 @@ export default function CareersPage() {
 
 							<form onSubmit={handleSubmit} className="space-y-5">
 								<div className="grid gap-5 sm:grid-cols-2">
-									<Field label="Full Name" name="fullName" type="text" required />
-									<Field label="Email Address" name="email" type="email" required />
-									<Field label="Phone Number" name="phone" type="tel" required />
-									<Field label="Current Location" name="location" type="text" required />
-									<Field label="LinkedIn Profile" name="linkedin" type="url" required />
-									<Field label="Portfolio / GitHub" name="portfolio" type="url" required />
+<Field label="Full Name" name="fullName" type="text" required autoComplete="name" />
+								<Field label="Email Address" name="email" type="email" required autoComplete="email" />
+								<Field label="Phone Number" name="phone" type="tel" required autoComplete="tel" />
+								<Field label="Current Location" name="location" type="text" required autoComplete="address-level1" />
+								<Field label="LinkedIn Profile" name="linkedin" type="url" required autoComplete="url" />
+								<Field label="Portfolio / GitHub" name="portfolio" type="url" required autoComplete="url" />
 								</div>
 
 								<div>
 									<label htmlFor="experience" className="mb-1.5 block text-sm font-medium text-navy-900 dark:text-white">Experience *</label>
-									<select id="experience" name="experience" value={hasExperience} onChange={(event) => setHasExperience(event.target.value)} className="input-field" required>
+									<select id="experience" name="experience" value={hasExperience} onChange={(event) => setHasExperience(event.target.value)} className="input-field" required autoComplete="off">
 										<option value="">Select an option</option>
 										<option value="yes">Yes</option>
 										<option value="no">No</option>
@@ -122,10 +122,10 @@ export default function CareersPage() {
 
 								{hasExperience === 'yes' && (
 									<div className="grid gap-5 sm:grid-cols-2">
-										<Field label="Total Experience (years)" name="experienceYears" type="number" min="0" step="0.5" required />
-										<Field label="Company Name" name="companyName" type="text" required />
+										<Field label="Total Experience (years)" name="experienceYears" type="number" min="0" step="0.5" required autoComplete="off" />
+										<Field label="Company Name" name="companyName" type="text" required autoComplete="organization" />
 										<div className="sm:col-span-2">
-											<Field label="Role / Profile at That Company" name="companyRole" type="text" required />
+											<Field label="Role / Profile at That Company" name="companyRole" type="text" required autoComplete="off" />
 										</div>
 									</div>
 								)}
@@ -172,11 +172,11 @@ export default function CareersPage() {
 	);
 }
 
-function Field({ label, name, type, required = false, min, step }: { label: string; name: string; type: string; required?: boolean; min?: string; step?: string }) {
-	return (
-		<div>
-			<label htmlFor={name} className="mb-1.5 block text-sm font-medium text-navy-900 dark:text-white">{label}{required ? ' *' : ''}</label>
-			<input id={name} name={name} type={type} min={min} step={step} className="input-field" required={required} />
-		</div>
-	);
-}
+function Field({ label, name, type, required = false, min, step, autoComplete }: { label: string; name: string; type: string; required?: boolean; min?: string; step?: string; autoComplete?: string }) {
+		return (
+			<div>
+				<label htmlFor={name} className="mb-1.5 block text-sm font-medium text-navy-900 dark:text-white">{label}{required ? ' *' : ''}</label>
+				<input id={name} name={name} type={type} min={min} step={step} className="input-field" required={required} autoComplete={autoComplete} />
+			</div>
+		);
+	}

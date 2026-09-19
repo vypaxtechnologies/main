@@ -50,6 +50,7 @@ export interface ProjectItem {
   impact: string;
   technologies: string[];
   accent: string;
+  image?: string;
 }
 
 export interface ProcessStep {
@@ -263,6 +264,7 @@ export const portfolioProjects = [
     impact: 'Rebuilt funnel architecture, CTA model, and lead automation flow.',
     technologies: ['React', 'Node.js', 'MongoDB', 'Analytics'],
     accent: 'from-blue-500 to-cyan-500',
+    image: '/project-digital-growth.jpg',
   },
   {
     title: 'Clinic Growth System',
@@ -272,6 +274,7 @@ export const portfolioProjects = [
     impact: 'Improved visibility, conversion paths, and appointment confidence.',
     technologies: ['SEO', 'UI Design', 'Google Business Profile', 'CRM'],
     accent: 'from-emerald-500 to-teal-500',
+    image: '/project-clinic-growth.jpg',
   },
   {
     title: 'Property Discovery Experience',
@@ -281,6 +284,7 @@ export const portfolioProjects = [
     impact: 'Restructured the viewing journey and optimized property pages.',
     technologies: ['Next.js', 'Maps', 'Lead capture', 'Performance'],
     accent: 'from-violet-500 to-purple-500',
+    image: '/project-property-discovery.jpg',
   },
   {
     title: 'Ops Dashboard for Services Brand',
@@ -290,6 +294,7 @@ export const portfolioProjects = [
     impact: 'Centralized operational reporting and workflow visibility.',
     technologies: ['React', 'API Integrations', 'Charts', 'Automation'],
     accent: 'from-orange-500 to-amber-500',
+    image: '/project-ops-dashboard.jpg',
   },
 ];
 

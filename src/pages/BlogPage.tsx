@@ -3,7 +3,6 @@ import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import SectionHeading from '@/components/SectionHeading';
-import CTASection from '@/components/CTASection';
 import { blogPosts } from '@/data/siteContent';
 
 export default function BlogPage() {
@@ -47,8 +46,6 @@ export default function BlogPage() {
           </div>
         </div>
       </section>
-
-      <CTASection />
     </>
   );
 }

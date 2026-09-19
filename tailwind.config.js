@@ -5,28 +5,6 @@ export default {
   theme: {
     extend: {
       colors: {
-        white: '#E3F2FD',
-        black: '#0D47A1',
-        slate: {
-          200: '#90CAF9',
-          300: '#90CAF9',
-        },
-        red: '#2196F3',
-        green: '#2196F3',
-        amber: '#90CAF9',
-        navy: {
-          50: '#E3F2FD',
-          100: '#90CAF9',
-          200: '#90CAF9',
-          300: '#2196F3',
-          400: '#2196F3',
-          500: '#2196F3',
-          600: '#0D47A1',
-          700: '#0D47A1',
-          800: '#0D47A1',
-          900: '#0D47A1',
-          950: '#0D47A1',
-        },
         brand: {
           blue: '#2196F3',
           purple: '#0D47A1',
@@ -45,10 +23,10 @@ export default {
         pill: '999px',
       },
       boxShadow: {
-        soft: '0 4px 24px -8px #90CAF9',
-        glow: '0 0 32px -12px #2196F3',
-        'glow-purple': '0 0 32px -12px #90CAF9',
-        card: '0 8px 32px -12px #90CAF9',
+        soft: '0 4px 24px -8px rgba(144, 202, 249, 0.5)',
+        glow: '0 0 32px -12px rgba(33, 150, 243, 0.6)',
+        'glow-purple': '0 0 32px -12px rgba(144, 202, 249, 0.6)',
+        card: '0 8px 32px -12px rgba(144, 202, 249, 0.5)',
       },
       backgroundImage: {
         'brand-gradient': 'linear-gradient(135deg, #2196F3 0%, #0D47A1 100%)',
@@ -70,8 +48,8 @@ export default {
           '50%': { transform: 'translateY(-12px)' },
         },
         pulseSoft: {
-          '0%, 100%': { boxShadow: '0 0 0 0 #90CAF9' },
-          '50%': { boxShadow: '0 0 0 12px #E3F2FD' },
+          '0%, 100%': { boxShadow: '0 0 0 0 rgba(144, 202, 249, 0.4)' },
+          '50%': { boxShadow: '0 0 0 12px rgba(144, 202, 249, 0)' },
         },
       },
     },

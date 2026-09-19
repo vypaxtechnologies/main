@@ -7,11 +7,10 @@ import WhyVypax from '@/sections/WhyVypax';
 import ProcessSection from '@/sections/ProcessSection';
 import ReviewsSection from '@/sections/ReviewsSection';
 import FAQSection from '@/sections/FAQSection';
-import CTASection from '@/components/CTASection';
 import ContactSection from '@/sections/ContactSection';
 
 export default function HomePage() {
-  useSEO({ title: 'Vypax Technologies | Your Technology & Business Growth Partner', description: 'IT services and digital growth company in Roorkee, Uttarakhand. Web development, digital marketing, SEO, data analysis, and custom software solutions. Build beyond limit.' });
+  useSEO({ title: 'Vypax Technologies | Your Technology & Business Growth Partner', description: 'IT services and digital growth company in Roorkee, Uttarakhand. Web development, digital marketing, SEO, data analysis, and custom software solutions. Build beyond limit.', keywords: 'Vypax Technologies, IT services Roorkee, web development Haridwar, digital marketing Uttarakhand, SEO services India, custom software development, business growth solutions, technology consulting' });
   return (
     <>
       <Hero />
@@ -22,7 +21,6 @@ export default function HomePage() {
       <ProcessSection />
       <ReviewsSection />
       <FAQSection />
-      <CTASection />
       <ContactSection />
     </>
   );

@@ -4,7 +4,6 @@ import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import SectionHeading from '@/components/SectionHeading';
-import CTASection from '@/components/CTASection';
 import { portfolioProjects } from '@/data/siteContent';
 
 export default function ProjectsPage() {
@@ -39,9 +38,26 @@ export default function ProjectsPage() {
                 transition={{ duration: 0.45, delay: index * 0.08 }}
                 className="group overflow-hidden rounded-[28px] border border-[var(--border)] bg-[var(--card)] shadow-soft"
               >
-                <div className={`h-40 bg-gradient-to-br ${project.accent}`} />
+                {project.image ? (
+                  <div className="relative h-48 overflow-hidden">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                    <span className="absolute left-4 top-4 rounded-full bg-black/50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-white backdrop-blur-sm">
+                      {project.category}
+                    </span>
+                  </div>
+                ) : (
+                  <div className={`h-40 bg-gradient-to-br ${project.accent}`} />
+                )}
                 <div className="p-6 md:p-7">
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-blue dark:text-brand-cyan">{project.category}</p>
+                  {!project.image && (
+                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-blue dark:text-brand-cyan">{project.category}</p>
+                  )}
                   <h3 className="mt-4 text-2xl font-bold text-navy-900 dark:text-white">{project.title}</h3>
                   <p className="mt-3 text-sm leading-relaxed text-[var(--text-muted)]">{project.summary}</p>
 
@@ -74,8 +90,6 @@ export default function ProjectsPage() {
           </div>
         </div>
       </section>
-
-      <CTASection />
     </>
   );
 }

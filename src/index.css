@@ -4,54 +4,58 @@
 
 @layer base {
   :root {
-     --bg: #eeecec;
-     --bg-subtle: #f1eeee;
+    --bg: #f7f7f7;
+    --bg-subtle: #f1eeee;
     --text: #0D47A1;
     --text-muted: #000000;
-     --border: #B8C7D1;
-     --card: #F7FAFC;
-     --shadow-soft: #AEBCC6;
+    --border: #B8C7D1;
+    --card: #F7FAFC;
+    --shadow-soft: #becbd5;
   }
 
   .dark {
-     --bg: #0A0E1A;
-     --bg-subtle: #101828;
-     --text: #E3F2FD;
+    --bg: #06080f;
+    --bg-subtle: #101828;
+    --text: #E3F2FD;
     --text-muted: #E0E4EA;
-     --border: #1E3050;
-     --card: #121A2B;
-     --shadow-soft: #050810;
+    --border: #1E3050;
+    --card: #121A2B;
+    --shadow-soft: #050810;
   }
 
   html {
     scroll-behavior: smooth;
     overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
 
   body {
-     background:
-      linear-gradient(135deg, var(--bg) 0%, #E8E8E8 55%, #D3E1EA 100%);
+    background: var(--bg);
     color: var(--text);
     cursor: auto;
-    user-select: none;
     font-family: 'Inter', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    transition: background-color 0.3s ease, color 0.3s ease;
     overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+    -webkit-tap-highlight-color: transparent;
   }
 
   .dark body {
-    background:
-      linear-gradient(135deg, #0A0E1A 0%, #101828 55%, #0F1D35 100%);
+    background: var(--bg);
   }
 
   a {
     text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
   }
 
   a, button, [role='button'] {
     cursor: pointer;
+    touch-action: manipulation;
   }
 
   input, textarea, select, [contenteditable='true'] {
@@ -59,14 +63,36 @@
     user-select: text;
   }
 
+  img, video, iframe {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Poppins', 'Inter', system-ui, sans-serif;
     letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin: 0;
+  }
+
+  p {
+    margin: 0;
   }
 
   ::selection {
     background-color: #90CAF9;
     color: inherit;
+  }
+
+  /* Optimize animations for reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 
@@ -152,7 +178,25 @@
     animation: storyMarquee 28s linear infinite;
   }
 
+  .service-track {
+    animation: serviceMarquee 45s linear infinite;
+  }
+
+  .why-track {
+    animation: whyMarquee 45s linear infinite;
+  }
+
   @keyframes storyMarquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(calc(-50% - 0.625rem)); }
+  }
+
+  @keyframes serviceMarquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(calc(-50% - 0.625rem)); }
+  }
+
+  @keyframes whyMarquee {
     from { transform: translateX(0); }
     to { transform: translateX(calc(-50% - 0.625rem)); }
   }

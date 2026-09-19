@@ -2,13 +2,12 @@ import { useSEO } from '@/hooks/useSEO';
 import { motion } from 'framer-motion';
 import { Target, Eye, Heart } from 'lucide-react';
 import SectionHeading from '@/components/SectionHeading';
-import CTASection from '@/components/CTASection';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import { aboutValues } from '@/data/whyVypax';
 import { companyConfig } from '@/data/company';
 
 export default function AboutPage() {
-  useSEO({ title: 'About Vypax Technologies', description: 'Vypax Technologies is a technology and digital growth company helping businesses build better digital products, improve their online presence, and create scalable technology systems.' });
+  useSEO({ title: 'About Vypax Technologies', description: 'Vypax Technologies is a technology and digital growth company helping businesses build better digital products, improve their online presence, and create scalable technology systems.', keywords: 'About Vypax Technologies, technology company Uttarakhand, digital growth company Haridwar, IT services Roorkee' });
   return (
     <>
       <section className="pt-32 pb-12 md:pt-40">
@@ -90,8 +89,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-
-      <CTASection />
     </>
   );
 }

@@ -13,20 +13,8 @@ export const generalFaqs: FAQItem[] = [
     a: 'Website pricing depends on your project requirements — number of pages, features, design complexity, and integrations. Request a free consultation and we\'ll provide a tailored quote.',
   },
   {
-    q: 'How long does website development take?',
-    a: 'A typical business website takes 2–4 weeks. Larger projects with custom features may take 6–8 weeks. We\'ll give you a clear timeline after the discovery phase.',
-  },
-  {
     q: 'Do you provide SEO services?',
     a: 'Yes. We improve your search visibility through technical audits, on-page optimization, keyword strategy, and local SEO — including Google Business Profile optimization.',
-  },
-  {
-    q: 'Do you provide digital marketing?',
-    a: 'Yes. We create and manage data-driven campaigns across social media, search, and email to grow your reach and generate qualified leads.',
-  },
-  {
-    q: 'Do you work with businesses outside Roorkee?',
-    a: 'Yes. While we\'re based in Roorkee, Uttarakhand, we work with clients across India and remotely.',
   },
   {
     q: 'How can I start a project?',

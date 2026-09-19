@@ -5,7 +5,6 @@ import SectionHeading from '@/components/SectionHeading';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import FAQAccordion from '@/components/FAQAccordion';
 import ProcessTimeline from '@/components/ProcessTimeline';
-import CTASection from '@/components/CTASection';
 import { services } from '@/data/services';
 import { generalFaqs } from '@/data/faq';
 
@@ -29,6 +28,5 @@ export default function ServiceDetailPage() {
     <section className="section-pad bg-[var(--bg-subtle)]"><div className="container-x"><SectionHeading eyebrow="Our Approach" title="A practical path from challenge to outcome" subtitle="We keep the process clear, collaborative, and focused on what your business needs next." /><ProcessTimeline /></div></section>
     <section className="section-pad"><div className="container-x"><div className="grid gap-12 lg:grid-cols-2"><div><SectionHeading eyebrow="Tools & Technologies" title="Built with the right tools" subtitle="We select technology based on your goals, timeline, and long-term needs." center={false} /></div><div className="flex flex-wrap content-start gap-3">{service.technologies.map((tech) => <span key={tech} className="rounded-full border border-[var(--border)] bg-[var(--card)] px-4 py-2 text-sm text-navy-700 shadow-soft dark:text-slate-300">{tech}</span>)}</div></div></div></section>
     <section className="section-pad bg-[var(--bg-subtle)]"><div className="container-x"><SectionHeading eyebrow="FAQ" title="Questions about this service" /><div className="mt-10"><FAQAccordion items={[...service.faqs, ...generalFaqs.slice(0, 2)]} /></div></div></section>
-    <CTASection />
   </>;
 }
