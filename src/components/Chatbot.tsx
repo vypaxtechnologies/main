@@ -44,7 +44,7 @@ function getBotResponse(input: string): string {
   if (q.includes('project') || q.includes('portfolio') || q.includes('work'))
     return 'You can explore the Projects page for the kinds of digital systems and experiences we are prepared to build. For a relevant recommendation, share your goals with the team.';
   if (q.includes('career') || q.includes('job') || q.includes('hiring') || q.includes('join'))
-    return 'Open roles and application details are available on the Careers page. You can also contact the team with your background and the kind of work you want to contribute to.';
+    return 'Open roles and application details are available on the Jobs page. You can also contact the team with your background and the kind of work you want to contribute to.';
   if (q.includes('contact') || q.includes('email') || q.includes('reach'))
     return `You can reach us at <a href="mailto:${companyConfig.email}" class="text-brand-blue dark:text-brand-cyan underline hover:opacity-80">${companyConfig.email}</a> or visit our contact page. We're based in ${companyConfig.location}.`;
   if (q.includes('location') || q.includes('where'))

@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import { fileURLToPath } from 'node:url';
 import contactRouter from './routes/contact.js';
 import careersRouter from './routes/careers.js';
+import jobsRouter from './routes/jobs.js';
 import trainingRouter from './routes/training.js';
 import newsletterRouter from './routes/newsletter.js';
 import ContactSubmission from './models/ContactSubmission.js';
@@ -23,6 +24,7 @@ app.use(express.json({ limit: '64kb' }));
 
 app.use('/api/contact', contactRouter);
 app.use('/api/careers', careersRouter);
+app.use('/api/jobs', jobsRouter);
 app.use('/api/training', trainingRouter);
 app.use('/api/newsletter', newsletterRouter);
 

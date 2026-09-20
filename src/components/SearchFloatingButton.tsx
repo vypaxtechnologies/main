@@ -12,7 +12,8 @@ const staticRoutes = [
   { terms: ['project', 'projects', 'portfolio', 'work'], path: '/projects' },
   { terms: ['training', 'development', 'learning', 'course', 'price', 'cost', 'package'], path: '/training-development' },
   { terms: ['blog', 'article', 'insight', 'resource'], path: '/blog' },
-  { terms: ['career', 'careers', 'job', 'jobs', 'hiring'], path: '/careers' },
+  { terms: ['job', 'jobs', 'hiring'], path: '/jobs' },
+  { terms: ['career', 'careers'], path: '/jobs' },
   { terms: ['contact', 'email', 'reach'], path: '/contact' },
 ];
 
@@ -31,7 +32,7 @@ function findRoute(query: string): string {
     ...portfolioProjects.map((item) => ({ text: `${item.title} ${item.category}`, path: '/projects' })),
     ...blogPosts.map((item) => ({ text: `${item.title} ${item.category}`, path: '/blog' })),
     ...industries.map((item) => ({ text: `${item.title} ${item.subtitle}`, path: '/solutions' })),
-    ...careers.map((item) => ({ text: `${item.title} ${item.type}`, path: '/careers' })),
+    ...careers.map((item) => ({ text: `${item.title} ${item.type}`, path: '/jobs' })),
   ];
   const contentMatch = contentEntries.find((item) => item.text.toLowerCase().includes(normalizedQuery));
   if (contentMatch) return contentMatch.path;

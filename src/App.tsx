@@ -4,7 +4,7 @@ import HomePage from '@/pages/HomePage';
 import AboutPage from '@/pages/AboutPage';
 import ServicesPage from '@/pages/ServicesPage';
 import ServiceDetailPage from '@/pages/ServiceDetailPage';
-import CareersPage from '@/pages/CareersPage';
+import JobsPage from '@/pages/JobsPage';
 import ContactPage from '@/pages/ContactPage';
 import SolutionsPage from '@/pages/SolutionsPage';
 import ProjectsPage from './pages/ProjectsPage';
@@ -29,7 +29,8 @@ function App() {
           <Route path="/training-development" element={<TrainingDevelopmentPage />} />
           <Route path="/pricing" element={<Navigate to="/training-development" replace />} />
           <Route path="/blog" element={<BlogPage />} />
-          <Route path="/careers" element={<CareersPage />} />
+          <Route path="/jobs" element={<JobsPage />} />
+          <Route path="/careers" element={<Navigate to="/jobs" replace />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/privacy-policy" element={<ContentPage title="Privacy Policy" eyebrow="Legal" description="Your privacy matters to us. This page is ready for your final privacy policy content." />} />

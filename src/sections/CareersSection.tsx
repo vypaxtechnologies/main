@@ -57,7 +57,7 @@ export default function CareersSection() {
                   <p className="mt-0.5 text-xs text-[var(--text-muted)]">{role.type} · {role.location}</p>
                 </div>
               </div>
-              <Link to="/careers" className="btn-primary text-xs">
+              <Link to="/jobs" className="btn-primary text-xs">
                 Apply Now
                 <ArrowRight className="h-3.5 w-3.5" />
               </Link>

@@ -6,7 +6,6 @@ import { fileURLToPath, URL } from 'node:url';
 export default defineConfig({
   plugins: [
     react({
-      // Optimize for production
       babel: {
         plugins: [
           ['@babel/plugin-transform-runtime', { absoluteRuntime: false }],
@@ -23,7 +22,9 @@ export default defineConfig({
     target: 'es2020',
     minify: 'esbuild',
     cssCodeSplit: true,
-    chunkSizeWarningLimit: 1000,
+    sourcemap: false,
+    chunkSizeWarningLimit: 300,
+    cssMinify: 'csso',
     rollupOptions: {
       output: {
         manualChunks: {
@@ -32,8 +33,16 @@ export default defineConfig({
           lucide: ['lucide-react'],
           gsap: ['gsap'],
         },
-        inlineDynamicImportsAsEsm: true,
       },
+    },
+    commonjsOptions: {
+      include: [/node_modules/],
+    },
+    esbuild: {
+      logLevel: 'info',
+      target: 'es2020',
+      legalComments: 'none',
+      drop: ['console', 'debugger'],
     },
   },
   server: {
@@ -51,9 +60,5 @@ export default defineConfig({
   },
   css: {
     devSourcemap: false,
-  },
-  esbuild: {
-    logLevel: 'info',
-    target: 'es2020',
   },
 });
