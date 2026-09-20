@@ -31,7 +31,6 @@ export default defineConfig({
           vendor: ['react', 'react-dom', 'react-router-dom'],
           framer: ['framer-motion'],
           lucide: ['lucide-react'],
-          gsap: ['gsap'],
         },
       },
     },

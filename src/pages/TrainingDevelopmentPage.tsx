@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import { AlertCircle, ArrowRight, BarChart3, BriefcaseBusiness, CheckCircle2, Code2, GraduationCap, LoaderCircle, Megaphone, Send, Users, Zap } from 'lucide-react';
 import { useSEO } from '@/hooks/useSEO';
+import { apiUrl } from '@/config/api';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import SectionHeading from '@/components/SectionHeading';
 import { companyConfig } from '@/data/company';
@@ -114,7 +115,7 @@ export default function TrainingDevelopmentPage() {
         body: payload,
       }).catch(() => {});
 
-      const response = await fetch('/api/training', {
+      const response = await fetch(apiUrl('/api/training'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
@@ -206,11 +207,13 @@ export default function TrainingDevelopmentPage() {
           />
 
           <div className="mt-10 overflow-hidden rounded-[28px] border border-[var(--border)] bg-[var(--card)] p-3 shadow-card sm:p-5">
-            <img
-              src="/Vypax-Internship-demo.png"
-              alt="Vypax Technologies Internship Certificate"
-              className="h-auto w-full rounded-2xl object-contain"
-            />
+              <img
+                src="/Vypax-Internship-demo.png"
+                alt="Vypax Technologies Internship Certificate"
+                loading="lazy"
+                decoding="async"
+                className="h-auto w-full rounded-2xl object-contain"
+              />
           </div>
         </div>
       </section>

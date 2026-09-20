@@ -2,6 +2,7 @@ import { useState, type FormEvent } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, CheckCircle2, LoaderCircle, Send, Sparkles, AlertCircle } from 'lucide-react';
 import { serviceDropdown } from '@/data/services';
+import { apiUrl } from '@/config/api';
 
 interface FormData {
   name: string;
@@ -58,7 +59,7 @@ export default function ContactForm() {
         body: emailPayload,
       }).catch(() => {});
 
-      const response = await fetch('/api/contact', {
+      const response = await fetch(apiUrl('/api/contact'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),

@@ -85,7 +85,21 @@
     color: inherit;
   }
 
-  /* Optimize animations for reduced motion */
+  section {
+    contain: layout style;
+  }
+
+  @keyframes blobFloat {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(16px, -16px) scale(1.05); }
+  }
+
+  .hero-dashboard,
+  .hero-metric,
+  .hero-scanline {
+    will-change: transform, opacity;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
       animation-duration: 0.01ms !important;
@@ -174,6 +188,12 @@
     background-clip: padding-box;
   }
 
+  .story-track,
+  .service-track,
+  .why-track {
+    will-change: transform;
+  }
+
   .story-track {
     animation: storyMarquee 28s linear infinite;
   }
@@ -205,10 +225,6 @@
 @layer utilities {
   .text-balance {
     text-wrap: balance;
-  }
-
-  .bg-noise {
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4' /%3E%3C/svg%3E");
   }
 
   .blob {

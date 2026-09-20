@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useSEO } from '@/hooks/useSEO';
+import { apiUrl } from '@/config/api';
 import { ArrowRight, Briefcase, CheckCircle2, LoaderCircle, AlertCircle, X } from 'lucide-react';
 import SectionHeading from '@/components/SectionHeading';
 import Breadcrumbs from '@/components/Breadcrumbs';
@@ -39,7 +40,7 @@ export default function CareersPage() {
 		databasePayload.append('resumeName', resume instanceof File ? resume.name : '');
 
 		try {
-			const response = await fetch('/api/careers', {
+			const response = await fetch(apiUrl('/api/careers'), {
 				method: 'POST',
 				body: databasePayload,
 			});
