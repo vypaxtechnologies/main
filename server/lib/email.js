@@ -8,26 +8,21 @@ function getTransporter() {
   const { EMAIL_USER, EMAIL_PASS } = process.env;
 
   if (!EMAIL_USER || !EMAIL_PASS) {
-    console.warn(
-      'Email service not configured: missing EMAIL_USER or EMAIL_PASS'
-    );
+    console.warn('Missing EMAIL_USER or EMAIL_PASS');
     return null;
   }
 
   transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
     auth: {
       user: EMAIL_USER,
       pass: EMAIL_PASS,
     },
-
-    // Important for Render
     connectionTimeout: 10000,
     greetingTimeout: 10000,
     socketTimeout: 15000,
-
-    logger: true,
-    debug: true,
   });
 
   console.log('Gmail SMTP transporter created');
@@ -47,10 +42,10 @@ export async function sendEmail({ to, subject, html, text }) {
   }
 
   try {
-    console.log('Attempting to send email to:', to);
+    console.log('Sending email to:', to);
 
     const info = await transport.sendMail({
-      from: process.env.EMAIL_USER,
+      from: `"Vypax Technologies" <${process.env.EMAIL_USER}>`,
       to,
       subject,
       html,
