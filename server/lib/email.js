@@ -1,73 +1,50 @@
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 
-let transporter = null;
-
-function getTransporter() {
-  if (transporter) return transporter;
-
-  const { EMAIL_USER, EMAIL_PASS } = process.env;
-
-  if (!EMAIL_USER || !EMAIL_PASS) {
-    console.warn('Missing EMAIL_USER or EMAIL_PASS');
-    return null;
-  }
-
-  transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
-    auth: {
-      user: EMAIL_USER,
-      pass: EMAIL_PASS,
-    },
-    connectionTimeout: 10000,
-    greetingTimeout: 10000,
-    socketTimeout: 15000,
-  });
-
-  console.log('Gmail SMTP transporter created');
-
-  return transporter;
-}
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function sendEmail({ to, subject, html, text }) {
-  const transport = getTransporter();
+  if (!process.env.RESEND_API_KEY) {
+    console.warn('Resend is not configured: missing RESEND_API_KEY');
 
-  if (!transport) {
     return {
       ok: false,
       skipped: true,
-      reason: 'Email service not configured',
+      reason: 'Resend API key not configured',
     };
   }
 
   try {
-    console.log('Sending email to:', to);
+    console.log('Sending email via Resend to:', to);
 
-    const info = await transport.sendMail({
-      from: `"Vypax Technologies" <${process.env.EMAIL_USER}>`,
-      to,
+    const { data, error } = await resend.emails.send({
+      from: 'Vypax Technologies <onboarding@resend.dev>',
+      to: [to],
       subject,
       html,
       text,
     });
 
-    console.log('Email sent successfully:', info.messageId);
+    if (error) {
+      console.error('Resend email failed:', error);
+
+      return {
+        ok: false,
+        error: error.message || String(error),
+      };
+    }
+
+    console.log('Resend email sent successfully:', data?.id);
 
     return {
       ok: true,
-      messageId: info.messageId,
+      messageId: data?.id,
     };
   } catch (error) {
-    console.error('Email send failed:', error);
-
-    transporter = null;
+    console.error('Resend email exception:', error);
 
     return {
       ok: false,
       error: error.message,
-      code: error.code || null,
-      command: error.command || null,
     };
   }
 }
