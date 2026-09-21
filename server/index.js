@@ -26,8 +26,7 @@ const allowedOrigins = [
   'http://localhost:3000',
   'http://localhost:5000',
   'https://vypaxtechnologies1.vercel.app',
-  process.env.CLIENT_ORIGIN,
-].filter(Boolean);
+];
 
 app.use(cors({
   origin: (origin, callback) => {
@@ -42,6 +41,8 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
+
+app.options('*', cors());
 app.use(express.json({ limit: '64kb' }));
 
 app.use('/api/contact', contactRouter);
