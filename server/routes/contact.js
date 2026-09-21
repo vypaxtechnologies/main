@@ -44,7 +44,11 @@ router.post('/', async (req, res) => {
         <p><strong>Message:</strong> ${message.trim()}</p>
       `,
       text: `New contact form submission\n\nName: ${name.trim()}\nEmail: ${email.trim()}\nPhone: ${phone ? phone.trim() : 'N/A'}\nCompany: ${company ? company.trim() : 'N/A'}\nService: ${service ? service.trim() : 'N/A'}\nMessage: ${message.trim()}`,
-    }).catch(() => {});
+    }).then(result => {
+  console.log('Notification email result:', result);
+}).catch(error => {
+  console.error('Notification email error:', error);
+});
 
     sendEmail({
       to: email.trim(),
@@ -55,7 +59,11 @@ router.post('/', async (req, res) => {
         <p>Best regards,<br>Vypax Technologies Team</p>
       `,
       text: `Hi ${name.trim()},\n\nThank you for reaching out to Vypax Technologies. We have received your message and our team will get back to you shortly.\n\nBest regards,\nVypax Technologies Team`,
-    }).catch(() => {});
+    }).then(result => {
+  console.log('Customer email result:', result);
+}).catch(error => {
+  console.error('Customer email error:', error);
+});
 
     return res.status(201).json({
       id: submission.id,
