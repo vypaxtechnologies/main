@@ -54,7 +54,6 @@ router.post('/', upload.single('_attachment'), async (req, res) => {
       resumeMimeType: req.file.mimetype,
     });
 
-    // Send email notification to the business
     sendEmail({
       to: NOTIFICATION_EMAIL,
       subject: `New job application from ${savedApplication.fullName} — ${savedApplication.role}`,
@@ -76,7 +75,6 @@ router.post('/', upload.single('_attachment'), async (req, res) => {
       text: `New job application\n\nRole: ${savedApplication.role}\nFull Name: ${savedApplication.fullName}\nEmail: ${savedApplication.email}\nPhone: ${savedApplication.phone}\nLocation: ${savedApplication.location}\nLinkedIn: ${savedApplication.linkedin}\nPortfolio: ${savedApplication.portfolio}\nExperience: ${savedApplication.experience}\nResume: ${savedApplication.resumeName}`,
     }).catch(() => {});
 
-    // Send auto-reply to the applicant
     sendEmail({
       to: savedApplication.email,
       subject: 'Thank you for your application — Vypax Technologies',

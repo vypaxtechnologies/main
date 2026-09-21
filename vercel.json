@@ -2,12 +2,12 @@
   "version": 2,
   "builds": [
     {
-      "src": "dist/**/*",
+      "src": "package.json",
       "use": "@vercel/static"
     }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "https://your-api-url.onrender.com/api/$1" },
+    { "src": "/api/(.*)", "dest": "https://vypax-api.onrender.com/api/$1" },
     { "src": "/(.*)", "dest": "dist/$1" }
   ]
 }

@@ -1,5 +1,4 @@
 import cors from 'cors';
-import dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
 import { fileURLToPath } from 'node:url';
@@ -13,7 +12,10 @@ import CareerApplication from './models/CareerApplication.js';
 import TrainingEnquiry from './models/TrainingEnquiry.js';
 import NewsletterSubscription from './models/NewsletterSubscription.js';
 
-dotenv.config({ path: fileURLToPath(new URL('../.env', import.meta.url)) });
+if (process.env.NODE_ENV !== 'production') {
+  const dotenv = await import('dotenv');
+  dotenv.config({ path: fileURLToPath(new URL('../.env', import.meta.url)) });
+}
 
 const app = express();
 const port = Number(process.env.PORT || 5000);

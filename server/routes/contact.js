@@ -31,7 +31,6 @@ router.post('/', async (req, res) => {
       message: message.trim(),
     });
 
-    // Send email notification to the business (fire-and-forget, don't block response)
     sendEmail({
       to: NOTIFICATION_EMAIL,
       subject: `New contact form message from ${name.trim()}`,
@@ -47,7 +46,6 @@ router.post('/', async (req, res) => {
       text: `New contact form submission\n\nName: ${name.trim()}\nEmail: ${email.trim()}\nPhone: ${phone ? phone.trim() : 'N/A'}\nCompany: ${company ? company.trim() : 'N/A'}\nService: ${service ? service.trim() : 'N/A'}\nMessage: ${message.trim()}`,
     }).catch(() => {});
 
-    // Send auto-reply to the user
     sendEmail({
       to: email.trim(),
       subject: 'Thank you for contacting Vypax Technologies',

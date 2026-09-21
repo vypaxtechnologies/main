@@ -54,7 +54,7 @@ export default function ContactForm() {
       emailPayload.append('_subject', `New contact form message from ${data.name}`);
       emailPayload.append('_captcha', 'false');
       emailPayload.append('_template', 'table');
-      await fetch('https://formsubmit.co/ajax/vypaxtechnologies@gmail.com', {
+      fetch('https://formsubmit.co/ajax/vypaxtechnologies@gmail.com', {
         method: 'POST',
         body: emailPayload,
       }).catch(() => {});
